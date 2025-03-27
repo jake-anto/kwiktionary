@@ -14,15 +14,24 @@ import {
   DialogTitle,
   List,
   ListItem,
+  SxProps,
   Tooltip,
   Typography,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import React from "react";
 
-function BlockQuote({ text }: { text: string }) {
+function BlockQuote({ text, sx }: { text: string; sx?: SxProps }) {
   return (
-    <Box sx={{ pl: 2, py: 0.3, borderLeft: "solid", borderColor: "grey.500" }}>
+    <Box
+      sx={{
+        pl: 2,
+        py: 0.3,
+        borderLeft: "solid",
+        borderColor: "grey.500",
+        ...sx,
+      }}
+    >
       <Typography variant="body2">
         <em>{text}</em>
       </Typography>
@@ -67,7 +76,7 @@ function Examples({ examples }: { examples: Examples }) {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <BlockQuote text={examples[0].text} />
+        <BlockQuote text={examples[0].text} sx={{ paddingRight: 2 }} />
         <Box sx={{ px: 1 }}>
           <Tooltip title="References and more examples" arrow>
             <Button
@@ -83,23 +92,20 @@ function Examples({ examples }: { examples: Examples }) {
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Examples</DialogTitle>
         <DialogContent>
-          <List component="ul" sx={{ listStyleType: "disc", pl: 4 }}>
-            {examples.map((example: Example, index: number) => (
-              <ListItem key={index} component="li" sx={{ display: "list-item" }}>
-                <em>{example.text}</em>
-                {example.ref && (
-                  <Typography
-                    component="span"
-                    variant="caption"
-                    sx={{ textAlign: "right" }}
-                  >
-                    {" - "}
-                    {example.ref}
-                  </Typography>
-                )}
-              </ListItem>
-            ))}
-          </List>
+          {examples.map((example: Example, index: number) => (
+            <Box key={index} sx={{ my: 1 }}>
+              <BlockQuote text={example.text} />
+              {example.ref && (
+                <Typography
+                  component="div"
+                  variant="caption"
+                  sx={{ textAlign: "right", py: 0.5 }}
+                >
+                  {example.ref}
+                </Typography>
+              )}
+            </Box>
+          ))}
         </DialogContent>
       </Dialog>
     </>
