@@ -12,6 +12,11 @@ const theme = createTheme({
         component: Link,
       },
     },
+    MuiSkeleton: {
+      defaultProps: {
+        animation: "wave",
+      },
+    },
   },
 });
 

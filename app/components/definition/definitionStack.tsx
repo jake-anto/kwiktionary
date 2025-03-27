@@ -3,9 +3,17 @@ import { Definition, Definitions } from "@/app/types/types";
 import { getDefinition } from "@/app/utils/api";
 import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
+import DefinitionStackLoading from "./definitionStackLoading";
 
-export default function DefinitionStack({ term }: { term: string }) {
-  const [loading, setLoading] = useState(true);
+export default function DefinitionStack({
+  term,
+  loading,
+  setLoading,
+}: {
+  term: string;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}) {
   const [definitions, setDefinitions] = useState<Definitions>();
 
   useEffect(() => {
@@ -20,16 +28,17 @@ export default function DefinitionStack({ term }: { term: string }) {
     };
 
     fetchDefinition();
-  }, [term]);
+  }, [term, setLoading]);
 
   return (
     <Stack spacing={2}>
-      {!loading &&
-        definitions &&
-        definitions.definition &&
+      {!loading && definitions && definitions.definition ? (
         definitions.definition.map((def: Definition, index: number) => (
           <DefinitionComponent key={index} def={def} />
-        ))}
+        ))
+      ) : (
+        <DefinitionStackLoading />
+      )}
     </Stack>
   );
 }
