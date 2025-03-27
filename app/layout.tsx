@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable}`}>
-        <CssBaseline />
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Header />
             <Container maxWidth="sm" sx={{ p: 2 }}>
               {children}
