@@ -85,7 +85,7 @@ function Examples({ examples }: { examples: Examples }) {
         <DialogContent>
           <List component="ul" sx={{ listStyleType: "disc", pl: 4 }}>
             {examples.map((example: Example, index: number) => (
-              <ListItem key={index}>
+              <ListItem key={index} component="li" sx={{ display: "list-item" }}>
                 <em>{example.text}</em>
                 {example.ref && (
                   <Typography
