@@ -4,7 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useState } from "react";
 import React from "react";
 import { Suggestions } from "@/app/types/types";
-import { getSuggestions } from "@/app/utls/api";
+import { getSuggestions } from "@/app/utils/api";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
 import Paper from "@mui/material/Paper";

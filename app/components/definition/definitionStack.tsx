@@ -1,6 +1,6 @@
 import DefinitionComponent from "@/app/components/definition/definition";
 import { Definition, Definitions } from "@/app/types/types";
-import { getDefinition } from "@/app/utls/api";
+import { getDefinition } from "@/app/utils/api";
 import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
 
