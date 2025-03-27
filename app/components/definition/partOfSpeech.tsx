@@ -20,6 +20,7 @@ const PartsOfSpeechExpanded: { [key: string]: string } = {
   abbrev: "abbreviation",
   name: "name",
   phrase: "phrase",
+  num: "numeral",
 };
 
 const PartOfSpeechExplanation: { [key: string]: string } = {
@@ -37,22 +38,19 @@ const PartOfSpeechExplanation: { [key: string]: string } = {
   name: "A name is a word that identifies a person, place, or thing.",
   phrase:
     "A phrase is a small group of words that forms a meaningful unit within a clause.",
+  num: "A numeral is a word or symbol that represents a number.",
 };
 
 export default function PartOfSpeech({ pos }: { pos: string }) {
   const [open, setOpen] = useState(false);
-
+  const ExpandedPos = PartsOfSpeechExpanded[pos] || pos;
   return (
     <>
-      <Chip
-        label={PartsOfSpeechExpanded[pos] || pos}
-        onClick={() => setOpen(true)}
-      />
+      <Chip label={ExpandedPos} onClick={() => setOpen(true)} />
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>
           {"Definition of "}
-          {PartsOfSpeechExpanded[pos].charAt(0).toUpperCase() +
-            PartsOfSpeechExpanded[pos].slice(1)}
+          {ExpandedPos.charAt(0).toUpperCase() + ExpandedPos.slice(1)}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
