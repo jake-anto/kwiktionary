@@ -76,7 +76,7 @@ function Examples({ examples }: { examples: Examples }) {
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <BlockQuote text={examples[0].text} sx={{ paddingRight: 2 }} />
+        <BlockQuote text={examples[0].text} />
         <Box sx={{ px: 1 }}>
           <Tooltip title="References and more examples" arrow>
             <Button
