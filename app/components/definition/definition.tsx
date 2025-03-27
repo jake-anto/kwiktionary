@@ -1,7 +1,14 @@
 import PartOfSpeech from "@/app/components/definition/partOfSpeech";
+import { type Definition, Relations as RelationsType } from "@/app/types/types";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import ShareTwoToneIcon from "@mui/icons-material/ShareTwoTone";
-import { Button, CardActions, Collapse, Divider, IconButton } from "@mui/material";
+import {
+  Button,
+  CardActions,
+  Collapse,
+  Divider,
+  IconButton,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -13,7 +20,6 @@ import Relations from "./relations";
 import Senses from "./senses";
 import Sounds from "./sounds";
 import Translations from "./translations";
-import { type Definition, Relations as RelationsType } from "@/app/types/types";
 
 export default function Definition({ def }: { def: Definition }) {
   const [expanded, setExpanded] = useState(false);
@@ -48,14 +54,23 @@ export default function Definition({ def }: { def: Definition }) {
         <IconButton>
           <ShareTwoToneIcon />
         </IconButton>
-        <Button
-          onClick={() => setExpanded(!expanded)}
-          aria-expanded={expanded}
-          aria-label="show more"
-          endIcon={expanded ? <ExpandLess /> : <ExpandMore />}
-        >
-          {expanded ? "Hide" : "Show"} more
-        </Button>
+        {def?.synonyms ||
+        def?.antonyms ||
+        def?.hypernyms ||
+        def?.holonyms ||
+        def?.meronyms ||
+        def?.derived ||
+        def?.related ||
+        def?.etymology_text ? (
+          <Button
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-label="show more"
+            endIcon={expanded ? <ExpandLess /> : <ExpandMore />}
+          >
+            {expanded ? "Hide" : "Show"} more
+          </Button>
+        ) : null}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
@@ -70,7 +85,10 @@ export default function Definition({ def }: { def: Definition }) {
           ].map(({ key, title }, index: number) =>
             def?.[key as keyof Definition] ? (
               <React.Fragment key={index}>
-                <Relations relations={def[key as keyof Definition] as RelationsType} title={title} />
+                <Relations
+                  relations={def[key as keyof Definition] as RelationsType}
+                  title={title}
+                />
                 <Divider />
               </React.Fragment>
             ) : null
