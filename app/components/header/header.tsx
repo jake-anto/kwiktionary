@@ -1,8 +1,15 @@
+"use client";
+
 import SearchBar from "@/app/components/header/search";
+import { ClickAwayListener } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import { useState } from "react";
+import Settings from "./settings";
 
 export default function Header() {
+  const [openSettings, setOpenSettings] = useState(false);
+
   return (
     <Box
       component="header"
@@ -13,7 +20,20 @@ export default function Header() {
       }}
     >
       <Container maxWidth="xs" sx={{ p: 2 }}>
-        <SearchBar />
+        <ClickAwayListener
+          onClickAway={() => {
+            setOpenSettings(false);
+          }}
+        >
+          <div>
+            <SearchBar
+              openSettings={openSettings}
+              setOpenSettings={setOpenSettings}
+            />
+
+            <Settings open={openSettings} />
+          </div>
+        </ClickAwayListener>
       </Container>
     </Box>
   );
