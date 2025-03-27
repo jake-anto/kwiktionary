@@ -48,7 +48,8 @@ export default function SearchBar() {
     event: React.SyntheticEvent<Element, Event>,
     value: Suggestions | null
   ) => {
-    console.log("Selected:", value);
+    if (!value) return;
+    setOpen(false);
     router.push(`/en/${value}`);
   };
 
