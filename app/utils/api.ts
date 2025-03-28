@@ -1,6 +1,6 @@
 import { Suggestions, Definitions } from "../types/types";
 
-const API_URL = "http://35.208.108.226/v1/";
+const API_URL = "https://dict.apihost.site/v1/";
 
 export function getSuggestions(prefix: string): Promise<Suggestions[]> {
   if (!prefix) {
