@@ -1,18 +1,15 @@
 import Header from "@/app/components/header/header";
 import theme from "@/app/styles/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import Container from "@mui/material/Container";
-// import { Andada_Pro } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable}`}>
+      <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
