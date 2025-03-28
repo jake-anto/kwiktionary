@@ -107,9 +107,9 @@ export default function SearchBar({
         renderInput={(params) => (
           <TextField
             {...params}
-            sx={{ mx: 2 }}
+            sx={{ mx: 2, my: 1 }}
             variant="standard"
-            label="Search"
+            placeholder="Search"
             slotProps={{
               input: {
                 ...params.InputProps,
