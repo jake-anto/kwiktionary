@@ -46,7 +46,6 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
     for (const key in links) {
       link_list.push(links[key][0]);
     }
-    console.log(link_list);
     // TODO: Needs fixing as this separates the terms by space
     // and some terms have space in them
     return (

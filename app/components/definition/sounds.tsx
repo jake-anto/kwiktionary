@@ -30,8 +30,6 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
     return sound ? [accent, sound.mp3_url] : null;
   };
 
-  console.log(getPronunciation("US", "ipa"), getSound("UK"));
-
   const playSound = (location: string) => {
     const audio = new Audio(location);
     audio.play();

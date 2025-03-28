@@ -39,7 +39,6 @@ export default function SearchBar({
       setLoading(true);
       try {
         const results = await getSuggestions(value);
-        console.log("Results:", results);
         setOptions(results);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
