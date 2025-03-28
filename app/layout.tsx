@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme} defaultMode="system">
             <CssBaseline />
             <Header />
             <Container maxWidth="sm" sx={{ p: 2 }}>
