@@ -82,8 +82,10 @@ export default function Relations({
           sx={{
             whiteSpace: "nowrap",
             overflow: "hidden",
-            backgroundImage:
-              "linear-gradient(to right, transparent, white 50%)",
+            width: "100%",
+            maskImage: "linear-gradient(to right, black 85%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, black 85%, transparent 100%)",
           }}
         >
           <strong>
