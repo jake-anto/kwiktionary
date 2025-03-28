@@ -3,8 +3,10 @@
 import { Suggestions } from "@/app/types/types";
 import { getSuggestions } from "@/app/utils/api";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import SettingsTwoToneIcon from "@mui/icons-material/SettingsTwoTone";
 import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -79,7 +81,29 @@ export default function SearchBar({
         onClose={handleClose}
         onChange={handleChange}
         onFocus={handleFocus}
+        autoHighlight
         noOptionsText="No results found"
+        renderOption={(props, option) => {
+          const { key, ...otherProps } = props;
+          const isFirstOption = options.length > 0 && option === options[0];
+
+          return (
+            <Box
+              key={key}
+              component="li"
+              {...otherProps}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              {option}
+              {isFirstOption && <KeyboardReturnIcon sx={{ ml: "auto" }} />}
+            </Box>
+          );
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
