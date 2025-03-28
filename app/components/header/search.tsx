@@ -4,6 +4,7 @@ import { Suggestions } from "@/app/types/types";
 import { getSuggestions } from "@/app/utils/api";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import SearchIcon from "@mui/icons-material/Search";
 import SettingsTwoToneIcon from "@mui/icons-material/SettingsTwoTone";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -114,6 +115,7 @@ export default function SearchBar({
               input: {
                 ...params.InputProps,
                 disableUnderline: true,
+                startAdornment: <SearchIcon sx={{ mr: 1 }} />,
                 endAdornment: (
                   <React.Fragment>
                     {loading ? (
