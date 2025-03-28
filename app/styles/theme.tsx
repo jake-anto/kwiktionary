@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "var(--font-roboto)",
+    fontFamily: "var(--font-inter)",
   },
   colorSchemes: {
     dark: true,
