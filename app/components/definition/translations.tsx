@@ -1,5 +1,4 @@
-import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import TranslateTwoToneIcon from "@mui/icons-material/TranslateTwoTone";
+import { Translation, type Translations } from "@/app/types/types";
 import {
   Collapse,
   Dialog,
@@ -17,8 +16,8 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
+import { ChevronDown, Languages } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Translation, type Translations } from "@/app/types/types";
 
 function TranslationsTableRowCollapsable({
   translation,
@@ -85,7 +84,12 @@ function TranslationsTableRow({ translation }: { translation: Translation }) {
               aria-label="expand row"
               sx={{ py: 0 }}
             >
-              {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+              <ChevronDown
+                style={{
+                  transform: open ? "rotate(180deg)" : "rotate(0)",
+                  transition: "transform 0.2s ease",
+                }}
+              />
             </IconButton>
           </TableCell>
         ) : (
@@ -159,17 +163,30 @@ function TranslationsTable({ translations }: { translations: Translations }) {
   );
 }
 
-export default function TranslationsComponent({ translations }: { translations: Translations }) {
+export default function TranslationsComponent({
+  translations,
+}: {
+  translations: Translations;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Tooltip title={`${translations.length} translations available`} placement="top" arrow>
+      <Tooltip
+        title={`${translations.length} translations available`}
+        placement="top"
+        arrow
+      >
         <IconButton onClick={() => setOpen(true)} sx={{ mx: 0.5 }}>
-          <TranslateTwoToneIcon />
+          <Languages />
         </IconButton>
       </Tooltip>
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>Translations</DialogTitle>
         <DialogContent>
           <TranslationsTable translations={translations} />

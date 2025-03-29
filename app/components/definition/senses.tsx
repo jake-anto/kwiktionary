@@ -5,7 +5,6 @@ import {
   type Gloss,
   type Senses,
 } from "@/app/types/types";
-import NavigateNextTwoToneIcon from "@mui/icons-material/NavigateNextTwoTone";
 import {
   Box,
   Button,
@@ -19,6 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "@mui/material/Link";
+import { ChevronRight } from "lucide-react";
 import React from "react";
 
 function BlockQuote({ text, sx }: { text: string; sx?: SxProps }) {
@@ -79,7 +79,7 @@ function Examples({ examples }: { examples: Examples }) {
         <Box sx={{ px: 1 }}>
           <Tooltip title="References and more examples" arrow>
             <Button
-              endIcon={<NavigateNextTwoToneIcon />}
+              endIcon={<ChevronRight size="16px" />}
               size="small"
               onClick={() => setOpen(true)}
             >

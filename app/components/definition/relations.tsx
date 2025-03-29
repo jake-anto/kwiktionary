@@ -1,5 +1,4 @@
 import { Relation, type Relations } from "@/app/types/types";
-import ChevronRightTwoToneIcon from "@mui/icons-material/ChevronRightTwoTone";
 import {
   Box,
   Chip,
@@ -17,6 +16,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 
 function RelationsTable({ relations }: { relations: Relations }) {
@@ -76,7 +76,7 @@ export default function Relations({
         }}
       >
         <IconButton onClick={() => setOpen(true)} size="small">
-          <ChevronRightTwoToneIcon />
+          <ChevronRight />
         </IconButton>
         <Typography
           sx={{

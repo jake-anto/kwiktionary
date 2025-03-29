@@ -1,7 +1,5 @@
 import PartOfSpeech from "@/app/components/definition/partOfSpeech";
 import { type Definition, Relations as RelationsType } from "@/app/types/types";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import ShareTwoToneIcon from "@mui/icons-material/ShareTwoTone";
 import {
   Button,
   CardActions,
@@ -13,6 +11,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
+import { ChevronDown, Share2 } from "lucide-react";
 import React, { useState } from "react";
 import Etymology from "./etymology";
 import Forms from "./forms";
@@ -52,7 +51,7 @@ export default function Definition({ def }: { def: Definition }) {
       )}
       <CardActions sx={{ justifyContent: "flex-end" }}>
         <IconButton>
-          <ShareTwoToneIcon />
+          <Share2 />
         </IconButton>
         {def?.synonyms ||
         def?.antonyms ||
@@ -66,7 +65,14 @@ export default function Definition({ def }: { def: Definition }) {
             onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
             aria-label="show more"
-            endIcon={expanded ? <ExpandLess /> : <ExpandMore />}
+            endIcon={
+              <ChevronDown
+                style={{
+                  transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.2s ease",
+                }}
+              />
+            }
           >
             {expanded ? "Hide" : "Show"} more
           </Button>

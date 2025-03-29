@@ -1,6 +1,6 @@
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { Box, IconButton, Typography, Tooltip } from "@mui/material";
 import { Sound, type Sounds } from "@/app/types/types";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { Volume2 } from "lucide-react";
 
 const Accents: { [key: string]: string } = {
   UK: "en-uk",
@@ -66,7 +66,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
                     size="small"
                     onClick={() => playSound(sound[1] as string)}
                   >
-                    <VolumeUpIcon />
+                    <Volume2 />
                   </IconButton>
                 </Tooltip>
               )}

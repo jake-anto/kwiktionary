@@ -2,10 +2,7 @@
 
 import { Suggestions } from "@/app/types/types";
 import { getSuggestions } from "@/app/utils/api";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import SearchIcon from "@mui/icons-material/Search";
-import SettingsTwoToneIcon from "@mui/icons-material/SettingsTwoTone";
+import { Icon } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -13,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
+import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -83,6 +81,7 @@ export default function SearchBar({
         onChange={handleChange}
         onFocus={handleFocus}
         autoHighlight
+        blurOnSelect
         noOptionsText="No results found"
         renderOption={(props, option) => {
           const { key, ...otherProps } = props;
@@ -101,21 +100,31 @@ export default function SearchBar({
               }}
             >
               {option}
-              {isFirstOption && <KeyboardReturnIcon sx={{ ml: "auto" }} />}
+              {isFirstOption && (
+                <CornerDownLeft
+                  style={{
+                    marginLeft: "auto",
+                  }}
+                />
+              )}
             </Box>
           );
         }}
         renderInput={(params) => (
           <TextField
             {...params}
-            sx={{ mx: 2, my: 1 }}
+            sx={{ mx: 1, my: 1 }}
             variant="standard"
             placeholder="Search"
             slotProps={{
               input: {
                 ...params.InputProps,
                 disableUnderline: true,
-                startAdornment: <SearchIcon sx={{ mr: 1 }} />,
+                startAdornment: (
+                  <Icon sx={{ mr: 1 }}>
+                    <Search />
+                  </Icon>
+                ),
                 endAdornment: (
                   <React.Fragment>
                     {loading ? (
@@ -130,10 +139,10 @@ export default function SearchBar({
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       <IconButton onClick={() => router.push("/")}>
-        <InfoOutlinedIcon />
+        <Info />
       </IconButton>
       <IconButton onClick={() => setOpenSettings(!openSettings)}>
-        <SettingsTwoToneIcon />
+        <Settings />
       </IconButton>
     </Paper>
   );

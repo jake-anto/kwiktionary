@@ -1,5 +1,4 @@
 import { Form, type Forms } from "@/app/types/types";
-import ChevronRightTwoToneIcon from "@mui/icons-material/ChevronRightTwoTone";
 import {
   Box,
   Dialog,
@@ -15,6 +14,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { ChevronRight } from "lucide-react";
 import React from "react";
 
 function FormsTable({ forms }: { forms: Forms }) {
@@ -74,7 +74,7 @@ export default function Forms({ forms }: { forms: Forms }) {
           ))}
         </Typography>
         <IconButton size="small" sx={{ ml: 1 }} onClick={() => setOpen(true)}>
-          <ChevronRightTwoToneIcon />
+          <ChevronRight />
         </IconButton>
       </Box>
       <Dialog
