@@ -94,7 +94,7 @@ export default function Relations({
           </strong>
           {relations.slice(0, 10).map((relation: Relation, index: number) => (
             <Chip
-              component="a"
+              component={Link}
               href={`/en/${relation.word}`}
               key={index}
               label={relation.word}
