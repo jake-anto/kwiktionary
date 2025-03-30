@@ -15,9 +15,12 @@ export function getDefinition(term: string): Promise<Definitions> {
   if (!term) {
     return Promise.resolve({} as Definitions);
   }
-  return fetch(`${API_URL}/define/en/${term}`).then((response) =>
-    response.json()
-  );
+  return fetch(`${API_URL}/define/en/${term}`).then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  });
 }
 
 //export const getSuggestions = debounce(_getSuggestions, 500);

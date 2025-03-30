@@ -4,6 +4,7 @@ import { getDefinition } from "@/app/utils/api";
 import Stack from "@mui/material/Stack";
 import { useEffect, useState } from "react";
 import DefinitionStackLoading from "./definitionStackLoading";
+import Error from "./error";
 
 export default function DefinitionStack({
   term,
@@ -15,13 +16,14 @@ export default function DefinitionStack({
   setLoading: (loading: boolean) => void;
 }) {
   const [definitions, setDefinitions] = useState<Definitions>();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDefinition = async () => {
       try {
         setDefinitions(await getDefinition(term));
       } catch (error) {
-        console.error("Error fetching definition:", error);
+        setError(`Failed to fetch definition as ${error}`);
       } finally {
         setLoading(false);
       }
@@ -31,14 +33,17 @@ export default function DefinitionStack({
   }, [term, setLoading]);
 
   return (
-    <Stack spacing={2}>
-      {!loading && definitions && definitions.definition ? (
-        definitions.definition.map((def: Definition, index: number) => (
-          <DefinitionComponent key={index} def={def} term={term} />
-        ))
-      ) : (
-        <DefinitionStackLoading />
-      )}
-    </Stack>
+    <>
+      <Stack spacing={2}>
+        {!loading && definitions && definitions.definition ? (
+          definitions.definition.map((def: Definition, index: number) => (
+            <DefinitionComponent key={index} def={def} term={term} />
+          ))
+        ) : (
+          <DefinitionStackLoading />
+        )}
+      </Stack>
+      {error && <Error error={error} setError={setError} />}
+    </>
   );
 }
