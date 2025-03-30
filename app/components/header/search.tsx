@@ -81,7 +81,6 @@ export default function SearchBar({
         onChange={handleChange}
         onFocus={handleFocus}
         autoHighlight
-        blurOnSelect
         noOptionsText="No results found"
         renderOption={(props, option) => {
           const { key, ...otherProps } = props;
