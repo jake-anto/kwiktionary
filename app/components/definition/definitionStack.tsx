@@ -34,7 +34,7 @@ export default function DefinitionStack({
     <Stack spacing={2}>
       {!loading && definitions && definitions.definition ? (
         definitions.definition.map((def: Definition, index: number) => (
-          <DefinitionComponent key={index} def={def} />
+          <DefinitionComponent key={index} def={def} term={term} />
         ))
       ) : (
         <DefinitionStackLoading />

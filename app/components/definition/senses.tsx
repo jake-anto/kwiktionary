@@ -1,3 +1,4 @@
+import BlockQuote from "@/app/components/definition/blockquote";
 import {
   Example,
   Sense,
@@ -13,31 +14,12 @@ import {
   DialogTitle,
   List,
   ListItem,
-  SxProps,
   Tooltip,
   Typography,
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import { ChevronRight } from "lucide-react";
 import React from "react";
-
-function BlockQuote({ text, sx }: { text: string; sx?: SxProps }) {
-  return (
-    <Box
-      sx={{
-        pl: 2,
-        py: 0.3,
-        borderLeft: "solid",
-        borderColor: "grey.500",
-        ...sx,
-      }}
-    >
-      <Typography variant="body2">
-        <em>{text}</em>
-      </Typography>
-    </Box>
-  );
-}
 
 function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
   const link_list: string[] = []; // Not a linked list, just an array of words to link
@@ -69,13 +51,13 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
   return <Typography>{gloss}</Typography>;
 }
 
-function Examples({ examples }: { examples: Examples }) {
+function Examples({ examples, term }: { examples: Examples; term: string }) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <BlockQuote text={examples[0].text} />
+        <BlockQuote text={examples[0].text} term={term} />
         <Box sx={{ px: 1 }}>
           <Tooltip title="References and more examples" arrow>
             <Button
@@ -93,7 +75,7 @@ function Examples({ examples }: { examples: Examples }) {
         <DialogContent>
           {examples.map((example: Example, index: number) => (
             <Box key={index} sx={{ my: 1 }}>
-              <BlockQuote text={example.text} />
+              <BlockQuote text={example.text} term={term} />
               {example.ref && (
                 <Typography
                   component="div"
@@ -111,7 +93,13 @@ function Examples({ examples }: { examples: Examples }) {
   );
 }
 
-export default function Senses({ senses }: { senses: Senses }) {
+export default function Senses({
+  senses,
+  term,
+}: {
+  senses: Senses;
+  term: string;
+}) {
   return (
     <List component="ol" sx={{ listStyleType: "decimal", pl: 4 }}>
       {senses.map((sense: Sense, index: number) => (
@@ -123,7 +111,7 @@ export default function Senses({ senses }: { senses: Senses }) {
           {sense.glosses && (
             <Gloss gloss={sense.glosses[0]} links={sense.links} />
           )}
-          {sense.examples && <Examples examples={sense.examples} />}
+          {sense.examples && <Examples examples={sense.examples} term={term} />}
         </ListItem>
       ))}
     </List>

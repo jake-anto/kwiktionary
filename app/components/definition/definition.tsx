@@ -20,7 +20,13 @@ import Senses from "./senses";
 import Sounds from "./sounds";
 import Translations from "./translations";
 
-export default function Definition({ def }: { def: Definition }) {
+export default function Definition({
+  def,
+  term,
+}: {
+  def: Definition;
+  term: string;
+}) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -46,7 +52,7 @@ export default function Definition({ def }: { def: Definition }) {
 
       {def.senses && (
         <Box sx={{ mt: 2 }}>
-          <Senses senses={def.senses} />
+          <Senses senses={def.senses} term={term} />
         </Box>
       )}
       <CardActions sx={{ justifyContent: "flex-end" }}>
