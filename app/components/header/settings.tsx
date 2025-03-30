@@ -6,7 +6,13 @@ export default function Settings({ open }: { open: boolean }) {
       in={open}
       timeout="auto"
       unmountOnExit
-      sx={{ position: "absolute", width: "100%", top: "100%", maxWidth: 396 }}
+      sx={{
+        position: "absolute",
+        width: "100%",
+        top: "100%",
+        maxWidth: 396,
+        backdropFilter: "blur(10px)",
+      }}
     >
       <Paper sx={{ borderRadius: 5 }}>
         <Typography variant="h6" sx={{ p: 2 }}>

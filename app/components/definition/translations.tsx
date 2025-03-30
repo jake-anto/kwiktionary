@@ -1,11 +1,11 @@
 import { Translation, type Translations } from "@/app/types/types";
 import {
+  Box,
   Collapse,
   Dialog,
   DialogContent,
   DialogTitle,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -120,7 +120,7 @@ function TranslationsTable({ translations }: { translations: Translations }) {
   };
 
   return (
-    <Paper sx={{ overflowX: "hidden", width: "100%" }}>
+    <Box sx={{ overflowX: "hidden", width: "100%" }}>
       <TextField
         label="Filter by Language"
         variant="filled"
@@ -148,7 +148,6 @@ function TranslationsTable({ translations }: { translations: Translations }) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={filteredTranslations.length}
         rowsPerPage={rowsPerPage}
@@ -159,7 +158,7 @@ function TranslationsTable({ translations }: { translations: Translations }) {
           setPage(0);
         }}
       />
-    </Paper>
+    </Box>
   );
 }
 

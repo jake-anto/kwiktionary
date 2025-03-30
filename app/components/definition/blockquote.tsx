@@ -16,7 +16,7 @@ export default function BlockQuote({
         pl: 2,
         py: 0.3,
         borderLeft: "solid",
-        borderColor: "grey.500",
+        borderColor: "primary.light",
         ...sx,
       }}
     >

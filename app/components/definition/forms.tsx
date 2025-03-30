@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -19,39 +18,37 @@ import React from "react";
 
 function FormsTable({ forms }: { forms: Forms }) {
   return (
-    <Paper>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>Form</TableCell>
-              <TableCell>Tags</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {forms.map((form: Form, index: number) => (
-              <React.Fragment key={index}>
-                <TableRow>
-                  <TableCell>
-                    <strong>{form.form}</strong>
-                  </TableCell>
-                  <TableCell>
-                    {form.tags.map((tag: string, index: number) => (
-                      <React.Fragment key={index}>
-                        <Box component="span" sx={{ whiteSpace: "nowrap" }}>
-                          {tag}
-                        </Box>
-                        {form.tags.length - 1 ? ", " : ""}
-                      </React.Fragment>
-                    ))}
-                  </TableCell>
-                </TableRow>
-              </React.Fragment>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+    <TableContainer sx={{ maxHeight: 440 }}>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell>Form</TableCell>
+            <TableCell>Tags</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {forms.map((form: Form, index: number) => (
+            <React.Fragment key={index}>
+              <TableRow>
+                <TableCell>
+                  <strong>{form.form}</strong>
+                </TableCell>
+                <TableCell>
+                  {form.tags.map((tag: string, index: number) => (
+                    <React.Fragment key={index}>
+                      <Box component="span" sx={{ whiteSpace: "nowrap" }}>
+                        {tag}
+                      </Box>
+                      {form.tags.length - 1 ? ", " : ""}
+                    </React.Fragment>
+                  ))}
+                </TableCell>
+              </TableRow>
+            </React.Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

@@ -7,7 +7,6 @@ import {
   DialogTitle,
   IconButton,
   Link,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -21,37 +20,35 @@ import React, { useState } from "react";
 
 function RelationsTable({ relations }: { relations: Relations }) {
   return (
-    <Paper>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>Word</TableCell>
-              <TableCell>Tags</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {relations.map((relation: Relation, index: number) => (
-              <React.Fragment key={index}>
-                <TableRow>
-                  <TableCell>
-                    <Link href={`/en/${relation.word}`}>{relation.word}</Link>
-                  </TableCell>
-                  <TableCell>
-                    {relation?.tags &&
-                      relation.tags.map((tag: string, index: number) => (
-                        <>
-                          <Chip key={index} label={tag} />{" "}
-                        </>
-                      ))}
-                  </TableCell>
-                </TableRow>
-              </React.Fragment>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+    <TableContainer sx={{ maxHeight: 440 }}>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell>Word</TableCell>
+            <TableCell>Tags</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {relations.map((relation: Relation, index: number) => (
+            <React.Fragment key={index}>
+              <TableRow>
+                <TableCell>
+                  <Link href={`/en/${relation.word}`}>{relation.word}</Link>
+                </TableCell>
+                <TableCell>
+                  {relation?.tags &&
+                    relation.tags.map((tag: string, index: number) => (
+                      <>
+                        <Chip key={index} label={tag} />{" "}
+                      </>
+                    ))}
+                </TableCell>
+              </TableRow>
+            </React.Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

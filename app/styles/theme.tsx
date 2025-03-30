@@ -7,7 +7,27 @@ const theme = createTheme({
     fontFamily: "var(--font-inter)",
   },
   colorSchemes: {
-    dark: true,
+    dark: {
+      palette: {
+        primary: {
+          main: "rgba(255, 196, 0, 1)",
+          light: "rgba(255, 204, 38, 1)",
+          dark: "rgba(199, 145, 0, 1)",
+        },
+        background: {
+          paper: "rgba(53, 48, 39, 0.3)",
+          default: "#110e07",
+        },
+      },
+    },
+    light: {
+      palette: {
+        background: {
+          paper: "rgba(226, 217, 204, 0.3)",
+          default: "rgba(255, 248, 242, 1)",
+        },
+      },
+    },
   },
   components: {
     MuiLink: {
@@ -20,6 +40,54 @@ const theme = createTheme({
         animation: "wave",
       },
     },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 0,
+        sx: {
+          backdropFilter: "blur(10px)",
+        },
+      },
+    },
+    MuiDialog: {
+      defaultProps: {
+        slotProps: {
+          paper: { elevation: 0 },
+        },
+      },
+    },
+    MuiTableContainer: {
+      defaultProps: {
+        sx: {
+          scrollbarWidth: "thin",
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& th": {
+            backgroundColor:
+              theme.palette.mode === "dark" ? "#231f17" : "#999080",
+            color: theme.palette.mode === "dark" ? "white" : "black",
+          },
+        }),
+      },
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#231f17" : "#999080",
+          color: theme.palette.mode === "dark" ? "white" : "black",
+        }),
+      },
+      defaultProps: {
+        rowsPerPageOptions: [5, 10, 25],
+      },
+    },
+  },
+  shape: {
+    borderRadius: 5,
   },
 });
 

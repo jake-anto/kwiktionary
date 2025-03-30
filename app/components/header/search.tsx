@@ -69,6 +69,7 @@ export default function SearchBar({
         alignItems: "center",
         borderRadius: 10,
         justifyContent: "space-evenly",
+        backdropFilter: "blur(10px)",
       }}
     >
       <Autocomplete
@@ -82,6 +83,19 @@ export default function SearchBar({
         onFocus={handleFocus}
         autoHighlight
         noOptionsText="No results found"
+        slotProps={{
+          paper: {
+            sx: {
+              mt: 2,
+              borderRadius: 5,
+            },
+          },
+          listbox: {
+            sx: {
+              py: 0.5,
+            },
+          },
+        }}
         renderOption={(props, option) => {
           const { key, ...otherProps } = props;
           const isFirstOption = options.length > 0 && option === options[0];
@@ -96,6 +110,7 @@ export default function SearchBar({
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
+                borderRadius: 5,
               }}
             >
               {option}
