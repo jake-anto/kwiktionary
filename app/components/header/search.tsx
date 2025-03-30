@@ -70,6 +70,7 @@ export default function SearchBar({
         borderRadius: 10,
         justifyContent: "space-evenly",
         backdropFilter: "blur(10px)",
+        border: "1px solid rgba(255, 255, 255, 0.125)",
       }}
     >
       <Autocomplete
