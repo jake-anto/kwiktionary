@@ -6,6 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { API_URL } from "./utils/api";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="dns-prefetch" href={API_URL} />
       <body className={inter.variable}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme} defaultMode="system">
