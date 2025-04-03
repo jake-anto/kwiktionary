@@ -17,3 +17,5 @@ export default function DefinitionPage() {
     </Stack>
   );
 }
+
+export const runtime = "edge";
