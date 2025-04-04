@@ -28,7 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="dns-prefetch" href={API_URL} />
+      <head>
+        <link rel="dns-prefetch" href={API_URL} />
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "79bd5efc4f2048d7aba2e67ce6cbc0db"}'
+        ></script>
+      </head>
+
       <body
         className={inter.variable}
         style={{
