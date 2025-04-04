@@ -10,21 +10,26 @@ const theme = createTheme({
     dark: {
       palette: {
         primary: {
-          main: "rgba(255, 196, 0, 1)",
-          light: "rgba(255, 204, 38, 1)",
-          dark: "rgba(199, 145, 0, 1)",
+          main: "rgb(255, 196, 0)",
+          light: "rgb(255, 204, 38)",
+          dark: "rgb(199, 145, 0)",
         },
         background: {
           paper: "rgba(53, 48, 39, 0.3)",
-          default: "#110e07",
+          default: "rgb(17, 14, 7)",
         },
       },
     },
     light: {
       palette: {
+        primary: {
+          main: "rgb(118, 90, 11)",
+          light: "rgb(231, 194, 108)",
+          dark: "rgb(199, 145, 0)",
+        },
         background: {
-          paper: "rgba(226, 217, 204, 0.3)",
-          default: "rgba(255, 248, 242, 1)",
+          paper: "rgba(226, 217, 204, 0.8)",
+          default: "rgb(255, 248, 242)",
         },
       },
     },
