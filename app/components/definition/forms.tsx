@@ -70,7 +70,12 @@ export default function Forms({ forms }: { forms: Forms }) {
             </React.Fragment>
           ))}
         </Typography>
-        <IconButton size="small" sx={{ ml: 1 }} onClick={() => setOpen(true)}>
+        <IconButton
+          size="small"
+          sx={{ ml: 1 }}
+          onClick={() => setOpen(true)}
+          aria-label="See all forms"
+        >
           <ChevronRight />
         </IconButton>
       </Box>

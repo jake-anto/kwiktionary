@@ -72,7 +72,11 @@ export default function Relations({
           my: 0.5,
         }}
       >
-        <IconButton onClick={() => setOpen(true)} size="small">
+        <IconButton
+          onClick={() => setOpen(true)}
+          size="small"
+          aria-label="See all relations"
+        >
           <ChevronRight />
         </IconButton>
         <Typography

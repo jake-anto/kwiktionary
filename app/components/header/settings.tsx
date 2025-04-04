@@ -55,6 +55,7 @@ export default function Settings({ open }: { open: boolean }) {
                     : "dark"
                 )
               }
+              aria-label="Toggle theme"
             >
               {mode === "dark" && <MoonStar />}
               {mode === "light" && <Sun />}

@@ -81,7 +81,7 @@ function TranslationsTableRow({ translation }: { translation: Translation }) {
             <IconButton
               onClick={() => setOpen(!open)}
               size="small"
-              aria-label="expand row"
+              aria-label="Expand to see more"
               sx={{ py: 0 }}
             >
               <ChevronDown
