@@ -64,6 +64,7 @@ function Examples({ examples, term }: { examples: Examples; term: string }) {
               endIcon={<ChevronRight size="16px" />}
               size="small"
               onClick={() => setOpen(true)}
+              aria-label="More examples"
             >
               More
             </Button>

@@ -138,6 +138,7 @@ export default function SearchBar({
           onFocus={handleFocus}
           autoHighlight
           noOptionsText="No results found"
+          aria-label="Search for terms"
           slotProps={{
             paper: {
               sx: {
@@ -149,6 +150,7 @@ export default function SearchBar({
               sx: {
                 py: 0.5,
               },
+              "aria-label": "Search suggestions",
             },
           }}
           renderOption={(props, option) => {
@@ -174,6 +176,8 @@ export default function SearchBar({
                     style={{
                       marginLeft: "auto",
                     }}
+                    aria-hidden="true"
+                    role="presentation"
                   />
                 )}
               </Box>
@@ -188,16 +192,21 @@ export default function SearchBar({
               slotProps={{
                 input: {
                   ...params.InputProps,
+                  "aria-label": "Search for terms",
                   disableUnderline: true,
                   startAdornment: (
-                    <Icon sx={{ mr: 1 }}>
+                    <Icon sx={{ mr: 1 }} aria-hidden="true">
                       <Search />
                     </Icon>
                   ),
                   endAdornment: (
                     <React.Fragment>
                       {loading ? (
-                        <CircularProgress color="inherit" size={20} />
+                        <CircularProgress
+                          color="inherit"
+                          size={20}
+                          aria-label={loading ? "Loading search results" : ""}
+                        />
                       ) : null}
                     </React.Fragment>
                   ),
@@ -207,10 +216,14 @@ export default function SearchBar({
           )}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton onClick={() => router.push("/")}>
+        <IconButton onClick={() => router.push("/")} aria-label="Information">
           <Info />
         </IconButton>
-        <IconButton onClick={() => setOpenSettings(!openSettings)}>
+        <IconButton
+          onClick={() => setOpenSettings(!openSettings)}
+          aria-label="Settings"
+          aria-expanded={openSettings}
+        >
           <Settings />
         </IconButton>
       </Paper>

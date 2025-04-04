@@ -50,7 +50,9 @@ export default function Footer() {
           Wikimedia Foundation, the operator of Wiktionary.
         </Typography>
       </Box>
-      <Button startIcon={<Github />}>Source Code</Button>
+      <Button startIcon={<Github />} aria-label="View source code at GitHub">
+        Source Code
+      </Button>
       <Typography sx={{ color: "text.secondary" }}>
         Made with ❤️ by Jake.
       </Typography>
