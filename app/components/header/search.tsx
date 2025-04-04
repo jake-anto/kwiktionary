@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Error from "../definition/error";
 
 export default function SearchBar({
@@ -24,32 +24,70 @@ export default function SearchBar({
 }) {
   const [openSuggestions, setOpenSuggestions] = useState(false);
   const [options, setOptions] = useState<readonly Suggestions[]>([]);
+  const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cache for recent searches to avoid redundant API calls
+  const searchCacheRef = useRef<Record<string, Suggestions[]>>({});
 
   const handleClose = () => {
     setOpenSuggestions(false);
-    setOptions([]);
   };
+
+  const fetchSuggestions = useCallback(async (value: string) => {
+    if (!value) {
+      setOptions([]);
+      return;
+    }
+
+    // Check cache first
+    if (searchCacheRef.current[value]) {
+      setOptions(searchCacheRef.current[value]);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const results = await getSuggestions(value);
+      setOptions(results);
+      // Save to cache
+      searchCacheRef.current[value] = results;
+    } catch (error) {
+      setError(`Failed to fetch suggestions as ${error}`);
+      setOpenSuggestions(false);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const handleInputChange = (
     event: React.SyntheticEvent<Element, Event>,
     value: string
   ) => {
-    setOpenSuggestions(true);
-    (async () => {
-      setLoading(true);
-      try {
-        const results = await getSuggestions(value);
-        setOptions(results);
-      } catch (error) {
-        setError(`Failed to fetch suggestions as ${error}`);
-        setOpenSuggestions(false);
-      } finally {
-        setLoading(false);
+    setInputValue(value);
+
+    // Clear previous debounce timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    if (value) {
+      setOpenSuggestions(true);
+
+      if (!searchCacheRef.current[value]) {
+        setLoading(true);
       }
-    })();
+
+      debounceTimerRef.current = setTimeout(() => {
+        fetchSuggestions(value);
+      }, 500);
+    } else {
+      setOpenSuggestions(false);
+      setLoading(false);
+    }
   };
 
   const handleChange = (
@@ -63,7 +101,19 @@ export default function SearchBar({
 
   const handleFocus = () => {
     setOpenSettings(false);
+    if (inputValue) {
+      setOpenSuggestions(true);
+    }
   };
+
+  // Clean up debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
