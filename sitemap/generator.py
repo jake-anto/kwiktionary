@@ -4,8 +4,8 @@ from datetime import date
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 
-BASE_URL = "https://kwiktionary.vercel.app/"
-ENTRY_URL_PREFIX = f"{BASE_URL}en/"
+BASE_URL = "https://kwiktionary.vercel.app"
+ENTRY_URL_PREFIX = f"{BASE_URL}/en/"
 OUTPUT_DIR = "../public/sitemaps"
 ENTRIES_PER_SITEMAP = 45000  # 50,000 is the max limit for a single sitemap file
 CHANGE_FREQ = "monthly"
@@ -100,7 +100,7 @@ def generate_sitemaps(entries):
         f.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
 
         for sitemap_file in sitemap_files:
-            sitemap_url = f"{BASE_URL}sitemaps/{sitemap_file}"
+            sitemap_url = f"{BASE_URL}/sitemaps/{sitemap_file}"
 
             f.write("  <sitemap>\n")
             f.write(f"    <loc>{escape(sitemap_url)}</loc>\n")
