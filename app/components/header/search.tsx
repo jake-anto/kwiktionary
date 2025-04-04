@@ -78,7 +78,7 @@ export default function SearchBar({
         }}
       >
         <Autocomplete
-          sx={{ width: 300 }}
+          sx={{ width: "100%", maxWidth: 300 }}
           options={options}
           loading={loading}
           open={openSuggestions}
