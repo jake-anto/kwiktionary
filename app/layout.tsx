@@ -49,7 +49,7 @@ export default function RootLayout({
           <ThemeProvider theme={theme} defaultMode="system">
             <CssBaseline />
             <Header />
-            <Container maxWidth="sm" sx={{ p: 2 }}>
+            <Container maxWidth="sm" sx={{ p: 2, minWidth: 10 }}>
               {children}
             </Container>
             <Footer />
