@@ -29,6 +29,18 @@ export default function Definition({
 }) {
   const [expanded, setExpanded] = useState(false);
 
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `Definition of ${term}`,
+          text: `Definition of ${term}: ${def.senses[0].glosses[0]}`,
+          url: window.location.href,
+        })
+        .catch((error) => console.error("Error sharing:", error));
+    }
+  };
+
   return (
     <Card sx={{ p: 1.5, borderRadius: 5 }} variant="outlined">
       <Stack
@@ -56,7 +68,7 @@ export default function Definition({
         </Box>
       )}
       <CardActions sx={{ justifyContent: "flex-end" }}>
-        <IconButton>
+        <IconButton onClick={handleShare} aria-label="share">
           <Share2 />
         </IconButton>
         {def?.synonyms ||

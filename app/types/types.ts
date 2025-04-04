@@ -56,7 +56,7 @@ export type Relation = {
 export type Relations = Relation[];
 
 export type Sense = {
-  glosses?: Glosses; // list of gloss strings (usually only one)
+  glosses: Glosses; // list of gloss strings (usually only one)
   raw_glosses?: string[]; // less-cleaned version of glosses
   tags?: string[]; // qualifiers and tags (e.g., "archaic", "colloquial")
   categories?: string[]; // sense-disambiguated category names
