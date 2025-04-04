@@ -5,7 +5,7 @@ export default function Etymology({ etymology }: { etymology: Etymology }) {
   return (
     <Box>
       <Typography variant="h6">Etymology</Typography>
-      <Typography>{etymology}</Typography>
+      <Typography variant="body2">{etymology}</Typography>
     </Box>
   );
 }
