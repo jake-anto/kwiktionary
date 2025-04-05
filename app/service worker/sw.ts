@@ -2,10 +2,10 @@ import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
 import {
   CacheableResponsePlugin,
+  CacheFirst,
   ExpirationPlugin,
   RegExpRoute,
   Serwist,
-  StaleWhileRevalidate,
 } from "serwist";
 
 declare global {
@@ -27,8 +27,8 @@ const serwist = new Serwist({
 // Cache all assets for /en/* route
 serwist.registerRoute(
   new RegExpRoute(
-    /^\/en\/.*/,
-    new StaleWhileRevalidate({
+    /^\/en\/(?=.)/,
+    new CacheFirst({
       cacheName: "kwiktionary-en-shell",
       plugins: [
         new CacheableResponsePlugin({ statuses: [200] }),
