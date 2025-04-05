@@ -38,6 +38,8 @@ const theme = createTheme({
     MuiLink: {
       defaultProps: {
         component: Link,
+        // @ts-expect-error: MuiLink doesn't have prefetch prop
+        prefetch: false,
       },
     },
     MuiSkeleton: {
@@ -90,6 +92,18 @@ const theme = createTheme({
       },
       defaultProps: {
         rowsPerPageOptions: [5, 10, 25],
+      },
+    },
+    MuiTooltip: {
+      defaultProps: {
+        arrow: true,
+      },
+      styleOverrides: {
+        tooltip: ({ theme }) => ({
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          border: `1px solid ${theme.palette.divider}`,
+        }),
       },
     },
   },
