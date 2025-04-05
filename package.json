@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.9",
     "@mui/material-nextjs": "^6.4.3",
+    "@serwist/next": "^9.0.12",
     "lucide-react": "^0.485.0",
     "next": "15.2.3",
     "react": "^19.0.0",
@@ -30,6 +31,7 @@
     "eslint": "^9.23.0",
     "eslint-config-next": "15.2.3",
     "eslint-config-prettier": "^10.1.1",
+    "serwist": "^9.0.12",
     "typescript": "^5.8.2"
   }
 }

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,5 +23,6 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "public/sw.js"],
+  "types": ["@serwist/next/typings"]
 }
