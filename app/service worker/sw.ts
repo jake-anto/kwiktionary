@@ -4,7 +4,7 @@ import {
   CacheableResponsePlugin,
   CacheFirst,
   ExpirationPlugin,
-  RegExpRoute,
+  NavigationRoute,
   Serwist,
 } from "serwist";
 
@@ -24,27 +24,27 @@ const serwist = new Serwist({
   runtimeCaching: defaultCache,
 });
 
-// Cache all assets for /en/* route
-serwist.registerRoute(
-  new RegExpRoute(
-    /^\/en\/(?=.)/,
-    new CacheFirst({
-      cacheName: "kwiktionary-en-shell",
-      plugins: [
-        new CacheableResponsePlugin({ statuses: [200] }),
-        new ExpirationPlugin({
-          maxEntries: 1,
-          maxAgeSeconds: 60 * 60 * 24, // 1 day
-        }),
-        {
-          cacheKeyWillBeUsed: async ({}) => {
-            return "en/_app_shell";
-          },
-        },
-      ],
+// Cache strategy for /en/* route
+const enDefinitionStrategy = new CacheFirst({
+  cacheName: "kwiktionary-en-shell",
+  plugins: [
+    new CacheableResponsePlugin({ statuses: [200] }),
+    new ExpirationPlugin({
+      maxEntries: 1,
+      maxAgeSeconds: 60 * 60 * 24, // 1 day
     }),
-    "GET"
-  )
+    {
+      cacheKeyWillBeUsed: async ({}) => {
+        return "en/_app_shell";
+      },
+    },
+  ],
+});
+
+serwist.registerRoute(
+  new NavigationRoute(enDefinitionStrategy, {
+    allowlist: [/^\/en\/(?=.)/],
+  })
 );
 
 // TODO: cache API responses
