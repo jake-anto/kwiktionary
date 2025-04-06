@@ -1,10 +1,10 @@
 import {
   Box,
+  Card,
   Collapse,
   FormControl,
   FormLabel,
   IconButton,
-  Paper,
   Typography,
   useColorScheme,
 } from "@mui/material";
@@ -23,10 +23,9 @@ export default function Settings({ open }: { open: boolean }) {
         width: "100%",
         top: "100%",
         maxWidth: 396,
-        backdropFilter: "blur(10px)",
       }}
     >
-      <Paper sx={{ borderRadius: 5 }}>
+      <Card>
         <Typography variant="h6" sx={{ p: 2 }}>
           Settings
         </Typography>
@@ -63,7 +62,7 @@ export default function Settings({ open }: { open: boolean }) {
             </IconButton>
           </FormControl>
         </Box>
-      </Paper>
+      </Card>
     </Collapse>
   );
 }
