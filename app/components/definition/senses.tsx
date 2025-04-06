@@ -38,7 +38,8 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   };
 
-  const pattern = `(${linkables.map(escapeRegExp).join("|")})`;
+  // TODO: Find a better way to link partial matches
+  const pattern = `\\b(${linkables.map(escapeRegExp).join("|")})\\b`;
   const regex = new RegExp(pattern, "g");
 
   const parts = gloss.split(regex).filter((part) => part); // filter removes empty strings
