@@ -2,14 +2,16 @@
 
 import { Suggestions } from "@/app/types/types";
 import { getSuggestions } from "@/app/utils/api";
-import { Icon } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
+import {
+  Autocomplete,
+  Box,
+  Card,
+  CircularProgress,
+  Divider,
+  Icon,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -117,14 +119,11 @@ export default function SearchBar({
 
   return (
     <>
-      <Paper
+      <Card
         sx={{
           display: "flex",
           alignItems: "center",
-          borderRadius: 10,
           justifyContent: "space-evenly",
-          backdropFilter: "blur(10px)",
-          border: "1px solid rgba(255, 255, 255, 0.125)",
         }}
       >
         <Autocomplete
@@ -226,7 +225,7 @@ export default function SearchBar({
         >
           <Settings />
         </IconButton>
-      </Paper>
+      </Card>
       {error && <Error error={error} setError={setError} />}
     </>
   );
