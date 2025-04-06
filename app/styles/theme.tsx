@@ -51,10 +51,14 @@ const theme = createTheme({
       defaultProps: {
         elevation: 0,
         sx: {
-          border: "1px solid rgba(255, 255, 255, 0.125)",
           backdropFilter: "blur(10px)",
           borderRadius: 5,
         },
+      },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          border: `1px solid ${theme.palette.divider}`,
+        }),
       },
     },
     MuiDialog: {
