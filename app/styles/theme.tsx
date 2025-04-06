@@ -101,6 +101,7 @@ const theme = createTheme({
       styleOverrides: {
         tooltip: ({ theme }) => ({
           backgroundColor: theme.palette.background.paper,
+          backdropFilter: "blur(10px)",
           color: theme.palette.text.primary,
           border: `1px solid ${theme.palette.divider}`,
         }),
