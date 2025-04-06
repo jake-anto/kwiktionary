@@ -85,7 +85,7 @@ export default function SearchBar({
 
       debounceTimerRef.current = setTimeout(() => {
         fetchSuggestions(value);
-      }, 500);
+      }, 300);
     } else {
       setOpenSuggestions(false);
       setLoading(false);
