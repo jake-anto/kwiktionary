@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kwiktionary",
+  title: "Kwiktionary: Wiktionary, Reimagined",
   description:
     "Fast, clean, and open-source access to the vast knowledge of Wiktionary.",
 };
