@@ -22,25 +22,29 @@ export default function DefinitionStack({
 
   useEffect(() => {
     const fetchDefinition = async () => {
+      // Remove existing noindex meta tag if present
+      document.querySelector("meta[name='robots']")?.remove();
       try {
         setDefinitions(await getDefinition(term));
       } catch (error) {
-        // Check if the term is capitalized
-        // If so, try to fetch the definition with a lowercase term
+        // Check if the term is starts with an uppercase letter
         if (term[0].toUpperCase() === term[0]) {
           const newTerm = term[0].toLowerCase() + term.slice(1);
-          setError(
-            `Something went wrong, attempting to fetch definition as ${newTerm}`
-          );
+          // Redirect to the lowercase version of the term
           router.replace(`/en/${newTerm}`);
+          return;
         }
+
         // Add noindex to the page
-        const meta = document.createElement("meta");
-        meta.name = "robots";
-        meta.content = "noindex";
-        document.head.appendChild(meta);
-        // Add the error the the title
-        document.title = `${error}`;
+        if (!document.querySelector("meta[name='robots'][content='noindex']")) {
+          const meta = document.createElement("meta");
+          meta.name = "robots";
+          meta.content = "noindex";
+          document.head.appendChild(meta);
+        }
+
+        // Update title for the error
+        document.title = `${error} - Kwiktionary`;
         setError(`Failed to fetch definition as ${error}`);
       } finally {
         setLoading(false);
