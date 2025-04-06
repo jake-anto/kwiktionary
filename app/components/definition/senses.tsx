@@ -22,33 +22,42 @@ import { ChevronRight } from "lucide-react";
 import React from "react";
 
 function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
-  const link_list: string[] = []; // Not a linked list, just an array of words to link
-
-  if (links) {
-    for (const key in links) {
-      link_list.push(links[key][0]);
-    }
-    // TODO: Needs fixing as this separates the terms by space
-    // and some terms have space in them
-    return (
-      <Typography>
-        {gloss.split(" ").map((word: string, index: number) => {
-          if (link_list.includes(word)) {
-            return (
-              <React.Fragment key={index}>
-                <Link underline="hover" href={`/en/${word}`}>
-                  {word}
-                </Link>{" "}
-              </React.Fragment>
-            );
-          } else {
-            return <React.Fragment key={index}>{word} </React.Fragment>;
-          }
-        })}
-      </Typography>
-    );
+  if (!links || Object.keys(links).length === 0) {
+    return <Typography>{gloss}</Typography>;
   }
-  return <Typography>{gloss}</Typography>;
+
+  const linkables: string[] = [];
+  for (const key in links) {
+    linkables.push(links[key][0]);
+  }
+
+  // Sort links by length descending to match longer terms first
+  linkables.sort((a, b) => b.length - a.length);
+
+  const escapeRegExp = (str: string) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  };
+
+  const pattern = `(${linkables.map(escapeRegExp).join("|")})`;
+  const regex = new RegExp(pattern, "g");
+
+  const parts = gloss.split(regex).filter((part) => part); // filter removes empty strings
+
+  return (
+    <Typography>
+      {parts.map((part, index) => {
+        if (linkables.includes(part)) {
+          return (
+            <Link key={index} underline="hover" href={`/en/${part}`}>
+              {part}
+            </Link>
+          );
+        } else {
+          return <React.Fragment key={index}>{part}</React.Fragment>;
+        }
+      })}
+    </Typography>
+  );
 }
 
 function Examples({ examples, term }: { examples: Examples; term: string }) {
