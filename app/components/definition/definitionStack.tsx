@@ -39,6 +39,8 @@ export default function DefinitionStack({
         meta.name = "robots";
         meta.content = "noindex";
         document.head.appendChild(meta);
+        // Add the error the the title
+        document.title = `${error}`;
         setError(`Failed to fetch definition as ${error}`);
       } finally {
         setLoading(false);
@@ -47,6 +49,20 @@ export default function DefinitionStack({
 
     fetchDefinition();
   }, [term, setLoading, router]);
+
+  // Update document title and meta description
+  useEffect(() => {
+    document.title = `${term} - Kwiktionary`;
+
+    if (definitions?.definition) {
+      document
+        .querySelector("meta[name='description']")
+        ?.setAttribute(
+          "content",
+          `The primary definition of ${term} is "${definitions?.definition[0]?.senses[0]?.glosses[0]}"`
+        );
+    }
+  }, [term, definitions?.definition]);
 
   return (
     <>
