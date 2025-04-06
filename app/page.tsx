@@ -3,10 +3,17 @@ import { Logo } from "@/app/components/logo";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Code2, LibraryBig, MonitorSmartphone, Rabbit } from "lucide-react";
+import { Metadata } from "next";
 
 const ICON_PROPS = {
   size: 52,
   strokeWidth: 1.5,
+};
+
+export const metadata: Metadata = {
+  verification: {
+    google: "Z8xPQKbPP1X-AgPtRFxRNfUTtL0XOjYpioc2tjmhUJA",
+  },
 };
 
 export default function Home() {
