@@ -20,12 +20,16 @@ export default function Settings({ open }: { open: boolean }) {
       unmountOnExit
       sx={{
         position: "absolute",
-        width: "100%",
         top: "100%",
-        maxWidth: 396,
+        left: 0,
+        right: 0,
+        px: 2,
+        display: "flex",
+        justifyContent: "center",
+        pointerEvents: open ? "auto" : "none",
       }}
     >
-      <Card>
+      <Card sx={{ maxWidth: 396, mx: "auto", width: "100%" }}>
         <Typography variant="h6" sx={{ p: 2 }}>
           Settings
         </Typography>
