@@ -43,27 +43,38 @@ export default function Settings({ open }: { open: boolean }) {
             }}
           >
             <FormLabel id="theme-toggle">
-              <strong>Theme:</strong>
-              {` ${mode}`}
+              <Typography>
+                <strong>Theme</strong>
+              </Typography>
             </FormLabel>
-            <IconButton
-              onClick={() =>
-                setMode(
-                  mode === "dark"
-                    ? "light"
-                    : mode === "light"
-                    ? "system"
-                    : mode === "system"
-                    ? "dark"
-                    : "dark"
-                )
-              }
-              aria-label="Toggle theme"
-            >
-              {mode === "dark" && <MoonStar />}
-              {mode === "light" && <Sun />}
-              {mode === "system" && <SunMoon />}
-            </IconButton>
+            <Box>
+              <Typography
+                component="span"
+                variant="body2"
+                sx={{
+                  color: "text.secondary",
+                }}
+              >{`(${mode})`}</Typography>
+
+              <IconButton
+                onClick={() =>
+                  setMode(
+                    mode === "dark"
+                      ? "light"
+                      : mode === "light"
+                      ? "system"
+                      : mode === "system"
+                      ? "dark"
+                      : "dark"
+                  )
+                }
+                aria-label="Toggle theme"
+              >
+                {mode === "dark" && <MoonStar />}
+                {mode === "light" && <Sun />}
+                {mode === "system" && <SunMoon />}
+              </IconButton>
+            </Box>
           </FormControl>
         </Box>
       </Card>
