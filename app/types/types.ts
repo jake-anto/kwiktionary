@@ -127,6 +127,7 @@ export type Definition = {
 
   wikidata?: string; // non-disambiguated Wikidata identifier
   wiktionary?: string; // non-disambiguated page title in Wikipedia
+  wikipedia?: string[]; // ?? not documented
 };
 
 export type Definitions = {

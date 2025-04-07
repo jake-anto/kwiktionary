@@ -6,6 +6,7 @@ import {
   Collapse,
   Divider,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -15,6 +16,7 @@ import { ChevronDown, Share2 } from "lucide-react";
 import React, { useState } from "react";
 import Etymology from "./etymology";
 import Forms from "./forms";
+import { Wikipedia } from "./icons";
 import Relations from "./relations";
 import Senses from "./senses";
 import Sounds from "./sounds";
@@ -65,37 +67,53 @@ export default function Definition({
           <Senses senses={def.senses} term={term} />
         </Box>
       )}
-      <CardActions sx={{ justifyContent: "flex-end" }}>
-        {navigator.share !== undefined && (
-          <IconButton onClick={handleShare} aria-label="share">
-            <Share2 />
-          </IconButton>
-        )}
+      <CardActions sx={{ justifyContent: "space-between" }}>
+        <div>
+          {def?.wikipedia && (
+            <Tooltip title="View on Wikipedia">
+              <IconButton
+                href={`https://en.wikipedia.org/wiki/${def.wikipedia[0]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Wikipedia link"
+              >
+                <Wikipedia />
+              </IconButton>
+            </Tooltip>
+          )}
+        </div>
+        <div>
+          {navigator.share !== undefined && (
+            <IconButton onClick={handleShare} aria-label="share">
+              <Share2 />
+            </IconButton>
+          )}
 
-        {def?.synonyms ||
-        def?.antonyms ||
-        def?.hypernyms ||
-        def?.holonyms ||
-        def?.meronyms ||
-        def?.derived ||
-        def?.related ||
-        def?.etymology_text ? (
-          <Button
-            onClick={() => setExpanded(!expanded)}
-            aria-expanded={expanded}
-            aria-label="show more"
-            endIcon={
-              <ChevronDown
-                style={{
-                  transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
-                }}
-              />
-            }
-          >
-            {expanded ? "Hide" : "Show"} more
-          </Button>
-        ) : null}
+          {def?.synonyms ||
+          def?.antonyms ||
+          def?.hypernyms ||
+          def?.holonyms ||
+          def?.meronyms ||
+          def?.derived ||
+          def?.related ||
+          def?.etymology_text ? (
+            <Button
+              onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
+              aria-label="show more"
+              endIcon={
+                <ChevronDown
+                  style={{
+                    transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              }
+            >
+              {expanded ? "Hide" : "Show"} more
+            </Button>
+          ) : null}
+        </div>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
