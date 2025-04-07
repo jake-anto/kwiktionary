@@ -86,12 +86,12 @@ function Examples({ examples, term }: { examples: Examples; term: string }) {
         <DialogContent>
           {examples.map((example: Example, index: number) => (
             <Box key={index} sx={{ my: 1 }}>
-              <BlockQuote text={example.text} term={term} />
+              <BlockQuote text={example.text} term={term} onDialog />
               {example.ref && (
                 <Typography
                   component="div"
                   variant="caption"
-                  sx={{ textAlign: "right", py: 0.5 }}
+                  sx={{ textAlign: "right", py: 0.5, color: "text.secondary" }}
                 >
                   {example.ref}
                 </Typography>

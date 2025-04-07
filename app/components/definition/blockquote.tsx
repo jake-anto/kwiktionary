@@ -4,10 +4,12 @@ import Highlighter from "react-highlight-words";
 export default function BlockQuote({
   text,
   term,
+  onDialog = false,
   sx,
 }: {
   text: string;
   term: string;
+  onDialog?: boolean;
   sx?: SxProps;
 }) {
   return (
@@ -20,7 +22,10 @@ export default function BlockQuote({
         ...sx,
       }}
     >
-      <Typography variant="body2">
+      <Typography
+        variant="body2"
+        sx={{ color: onDialog ? "text.primary" : "text.secondary" }}
+      >
         <Highlighter
           textToHighlight={text}
           searchWords={[term]}
