@@ -30,15 +30,13 @@ export default function Definition({
   const [expanded, setExpanded] = useState(false);
 
   const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: `Definition of ${term}`,
-          text: `Definition of ${term}: ${def.senses[0].glosses[0]}`,
-          url: window.location.href,
-        })
-        .catch((error) => console.error("Error sharing:", error));
-    }
+    navigator
+      .share({
+        title: `Definition of ${term}`,
+        text: `Definition of ${term} (${def.pos}): ${def.senses[0].glosses[0]} (Source: Wiktionary)`,
+        url: window.location.href,
+      })
+      .catch((error) => console.error("Error sharing:", error));
   };
 
   return (
@@ -68,9 +66,12 @@ export default function Definition({
         </Box>
       )}
       <CardActions sx={{ justifyContent: "flex-end" }}>
-        <IconButton onClick={handleShare} aria-label="share">
-          <Share2 />
-        </IconButton>
+        {navigator.share !== undefined && (
+          <IconButton onClick={handleShare} aria-label="share">
+            <Share2 />
+          </IconButton>
+        )}
+
         {def?.synonyms ||
         def?.antonyms ||
         def?.hypernyms ||
