@@ -16,6 +16,7 @@ STATIC_PAGES = {
 
 print("Loading entries...")
 with open("terms.txt", "r", encoding="utf-8") as f:
+    next(f)  # Skip the first entry (" ") because it's not supported
     entries = [line.strip() for line in f if line.strip()]
 print(f"Loaded {len(entries)} entries.")
 
@@ -112,9 +113,6 @@ def generate_sitemaps(entries):
         f.write("</sitemapindex>\n")
     print(f"Finished {index_filename}")
     print("\nSitemap generation complete!")
-    print(
-        f"Upload the contents of the '{OUTPUT_DIR}' directory to your web server's root."
-    )
     print(f"Make sure your robots.txt points to: {BASE_URL}/{index_filename}")
 
 
