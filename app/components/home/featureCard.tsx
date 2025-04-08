@@ -13,7 +13,7 @@ export default function FeatureCard({
 }) {
   const alternativeStyle = useMediaQuery("(min-width:600px)");
   return (
-    <Card>
+    <Card sx={{ height: "100%" }}>
       <Box
         sx={{
           display: "flex",
