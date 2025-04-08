@@ -46,7 +46,7 @@ export default function RootLayout({
         }}
       >
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme} defaultMode="system">
+          <ThemeProvider theme={theme} defaultMode="dark">
             <CssBaseline />
             <Header />
             <Container maxWidth="sm" sx={{ p: 2, minWidth: 10 }}>
