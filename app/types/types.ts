@@ -135,3 +135,8 @@ export type Definitions = {
   definition: Definition[]; // list of definitions for the word
   source: JSON; // source of the data
 };
+
+export type TermsList = string[]; // list of terms
+export type Stats = {
+  [lang: string]: number; // language code and number of terms
+};

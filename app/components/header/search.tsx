@@ -15,7 +15,7 @@ import {
 import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import Error from "../definition/error";
+import Error from "../error";
 
 export default function SearchBar({
   openSettings,

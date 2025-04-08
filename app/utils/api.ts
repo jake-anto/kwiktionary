@@ -1,4 +1,4 @@
-import { Suggestions, Definitions } from "../types/types";
+import { Definitions, Stats, Suggestions, TermsList } from "../types/types";
 
 export const API_URL = "https://dict.apihost.site/v1/";
 
@@ -23,4 +23,25 @@ export async function getDefinition(term: string): Promise<Definitions> {
   return response.json();
 }
 
-//export const getSuggestions = debounce(_getSuggestions, 500);
+export async function getListOfTerms(
+  lang: string,
+  limit: number,
+  offset: number
+): Promise<TermsList> {
+  const response = await fetch(
+    `${API_URL}/list/${lang}?limit=${limit}&offset=${offset + 1}` // +1 to skip the first term " "
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  return response.json();
+}
+
+export async function getStats(): Promise<Stats> {
+  const response = await fetch(`${API_URL}/stats`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  return response.json();
+}

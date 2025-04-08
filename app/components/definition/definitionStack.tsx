@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import DefinitionStackLoading from "./definitionStackLoading";
-import Error from "./error";
+import Error from "../error";
 
 export default function DefinitionStack({
   term,
