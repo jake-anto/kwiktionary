@@ -12,6 +12,7 @@ CHANGE_FREQ = "monthly"
 ENTRY_PRIORITY = "0.5"
 STATIC_PAGES = {
     "/": {"priority": "1.0", "changefreq": "monthly"},
+    "/en": {"priority": "0.8", "changefreq": "monthly"},
 }
 
 print("Loading entries...")
