@@ -1,6 +1,6 @@
 import FeatureCard from "@/app/components/home/featureCard";
 import { Logo } from "@/app/components/logo";
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Code2, LibraryBig, MonitorSmartphone, Rabbit } from "lucide-react";
 import { Metadata } from "next";
@@ -30,8 +30,8 @@ export default function Home() {
       />
       <Typography variant="body1">
         Tired of clunky dictionary sites? Kwiktionary harnesses the immense
-        power of Wiktionary&apos;s 1.2 million+ entries and presents them in a
-        sleek, intuitive, and mobile-first design.
+        power of Wiktionary&apos;s <Link href="/en">1.2 million+ entries</Link>{" "}
+        and presents them in a sleek, intuitive, and mobile-first design.
       </Typography>
       <Grid container spacing={1.5} sx={{ mt: 3 }}>
         <Grid
