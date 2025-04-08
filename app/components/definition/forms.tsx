@@ -11,6 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { ChevronRight } from "lucide-react";
@@ -70,14 +71,16 @@ export default function Forms({ forms }: { forms: Forms }) {
             </React.Fragment>
           ))}
         </Typography>
-        <IconButton
-          size="small"
-          sx={{ ml: 1 }}
-          onClick={() => setOpen(true)}
-          aria-label="See all forms"
-        >
-          <ChevronRight />
-        </IconButton>
+        <Tooltip title="See all forms">
+          <IconButton
+            size="small"
+            sx={{ ml: 1 }}
+            onClick={() => setOpen(true)}
+            aria-label="See all forms"
+          >
+            <ChevronRight />
+          </IconButton>
+        </Tooltip>
       </Box>
       <Dialog
         open={open}

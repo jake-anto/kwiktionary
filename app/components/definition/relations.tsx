@@ -13,6 +13,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { ChevronRight } from "lucide-react";
@@ -61,6 +62,8 @@ export default function Relations({
 }) {
   const [open, setOpen] = useState(false);
 
+  const tooltipText = `See all ${title.toLowerCase()}`;
+
   return (
     <>
       <Box
@@ -72,13 +75,15 @@ export default function Relations({
           my: 0.5,
         }}
       >
-        <IconButton
-          onClick={() => setOpen(true)}
-          size="small"
-          aria-label="See all relations"
-        >
-          <ChevronRight />
-        </IconButton>
+        <Tooltip title={tooltipText} placement="top">
+          <IconButton
+            onClick={() => setOpen(true)}
+            size="small"
+            aria-label={tooltipText}
+          >
+            <ChevronRight />
+          </IconButton>
+        </Tooltip>
         <Typography
           sx={{
             whiteSpace: "nowrap",
