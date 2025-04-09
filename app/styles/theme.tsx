@@ -111,6 +111,13 @@ const theme = createTheme({
         }),
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "50px",
+        },
+      },
+    },
   },
   shape: {
     borderRadius: 5,
