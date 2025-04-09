@@ -21,7 +21,7 @@ export default function Header() {
         zIndex: 1000,
       }}
     >
-      <Container maxWidth="xs" sx={{ p: 2 }}>
+      <Container maxWidth="xs" sx={{ p: 2, position: "relative" }}>
         <ClickAwayListener
           onClickAway={() => {
             setOpenSettings(false);
