@@ -5,6 +5,7 @@ const withSerwist = withSerwistInit({
   swSrc: "app/service worker/sw.ts",
   swDest: "public/sw.js",
   disable: process.env.NODE_ENV !== "production",
+  exclude: [({ asset }) => asset.name.startsWith("sitemaps/")],
 });
 
 const nextConfig: NextConfig = {
