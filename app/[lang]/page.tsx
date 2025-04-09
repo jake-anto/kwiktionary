@@ -57,7 +57,7 @@ function List({
   }, [setError, lang, rowsPerPage, page]);
 
   return (
-    <Paper>
+    <Paper sx={{ overflow: "hidden", borderRadius: 5 }}>
       <TableContainer>
         <Table stickyHeader>
           <TableHead>
@@ -161,7 +161,7 @@ export default function ListPage() {
   return (
     <>
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
-        List of all available terms
+        List of all entries
       </Typography>
       <List amountTerms={amountTerms} lang={lang} setError={setError} />
       {error && <Error error={error} setError={setError} />}

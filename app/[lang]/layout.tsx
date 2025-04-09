@@ -10,8 +10,9 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "List of all available terms - Kwiktionary",
-  description: "List of all available terms in Kwiktionary.",
+  title: "List of all entries - Kwiktionary",
+  description:
+    "A list of all entries in the Kwiktionary database. It contains over 1.2 million entries in English.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
