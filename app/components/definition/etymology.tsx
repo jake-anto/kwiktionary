@@ -5,7 +5,14 @@ export default function Etymology({ etymology }: { etymology: Etymology }) {
   return (
     <Box>
       <Typography variant="h6">Etymology</Typography>
-      <Typography variant="body2">{etymology}</Typography>
+      <Typography
+        variant="body2"
+        sx={{
+          color: "text.secondary",
+        }}
+      >
+        {etymology}
+      </Typography>
     </Box>
   );
 }
