@@ -13,6 +13,7 @@ ENTRY_PRIORITY = "0.5"
 STATIC_PAGES = {
     "/": {"priority": "1.0", "changefreq": "monthly"},
     "/en": {"priority": "0.8", "changefreq": "monthly"},
+    "/about/license": {"priority": "0.8", "changefreq": "yearly"},
 }
 
 print("Loading entries...")
