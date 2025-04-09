@@ -56,14 +56,14 @@ export default function DefinitionStack({
 
   // Update document title and meta description
   useEffect(() => {
-    document.title = `${term} - Kwiktionary`;
+    document.title = `${term} Definition | Kwiktionary`;
 
     if (definitions?.definition) {
       document
         .querySelector("meta[name='description']")
         ?.setAttribute(
           "content",
-          `The primary definition of ${term} is "${definitions?.definition[0]?.senses[0]?.glosses[0]}"`
+          `Definition of ${term}: "${definitions?.definition[0]?.senses[0]?.glosses[0]}"`
         );
     }
   }, [term, definitions?.definition]);
