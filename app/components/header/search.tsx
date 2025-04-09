@@ -20,9 +20,13 @@ import Error from "../error";
 export default function SearchBar({
   openSettings,
   setOpenSettings,
+  openAbout,
+  setOpenAbout,
 }: {
   openSettings: boolean;
   setOpenSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  openAbout: boolean;
+  setOpenAbout: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [openSuggestions, setOpenSuggestions] = useState(false);
   const [options, setOptions] = useState<readonly Suggestions[]>([]);
@@ -103,6 +107,7 @@ export default function SearchBar({
 
   const handleFocus = () => {
     setOpenSettings(false);
+    setOpenAbout(false);
     if (inputValue) {
       setOpenSuggestions(true);
     }
@@ -215,11 +220,20 @@ export default function SearchBar({
           )}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton onClick={() => router.push("/")} aria-label="Information">
+        <IconButton
+          onClick={() => {
+            setTimeout(() => setOpenAbout(!openAbout), 300);
+            setOpenSettings(false);
+          }}
+          aria-label="About"
+        >
           <Info />
         </IconButton>
         <IconButton
-          onClick={() => setOpenSettings(!openSettings)}
+          onClick={() => {
+            setTimeout(() => setOpenSettings(!openSettings), 300);
+            setOpenAbout(false);
+          }}
           aria-label="Settings"
           aria-expanded={openSettings}
         >
