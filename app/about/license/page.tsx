@@ -1,12 +1,12 @@
 import {
-  Typography,
-  Link as MuiLink,
+  Box,
   List,
   ListItem,
   ListItemIcon,
-  Box,
+  Link as MuiLink,
+  Typography,
 } from "@mui/material";
-import { CircleSmall } from "lucide-react";
+import { CircleSmall, Scale } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -157,7 +157,13 @@ function Contact() {
 export default function License() {
   return (
     <>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+      >
+        <Scale size="1em" />
         License
       </Typography>
       <Typography gutterBottom>
