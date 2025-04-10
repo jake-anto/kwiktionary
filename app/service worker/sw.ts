@@ -7,6 +7,7 @@ import {
   CacheableResponsePlugin,
   CacheFirst,
   ExpirationPlugin,
+  NetworkOnly,
   Serwist,
   StaleWhileRevalidate,
 } from "serwist";
@@ -28,7 +29,7 @@ const cache: RuntimeCaching[] = [
       plugins: [
         new CacheableResponsePlugin({ statuses: [200] }),
         new ExpirationPlugin({
-          maxEntries: 50,
+          maxEntries: 100,
           maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
         }),
       ],
@@ -70,6 +71,29 @@ const cache: RuntimeCaching[] = [
       ],
     }),
   },
+  {
+    matcher: ({ url }) => {
+      return (
+        url.origin === new URL(API_URL).origin && url.pathname.includes("list")
+      );
+    },
+    handler: new CacheFirst({
+      cacheName: "api-list-cache",
+      plugins: [
+        new CacheableResponsePlugin({ statuses: [200] }),
+        new ExpirationPlugin({
+          maxEntries: 100,
+          maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+        }),
+      ],
+    }),
+  },
+  {
+    matcher: ({ request }) => {
+      return request.destination === "document";
+    },
+    handler: new NetworkOnly(),
+  },
 ];
 
 const serwist = new Serwist({
@@ -80,6 +104,18 @@ const serwist = new Serwist({
   runtimeCaching: cache,
   precacheOptions: {
     cleanupOutdatedCaches: true,
+    // ignoreURLParametersMatching: [/_rsc/],
+    // navigateFallback: "/offline",
+  },
+  fallbacks: {
+    entries: [
+      {
+        url: "/offline",
+        matcher: ({ request }) => {
+          return request.destination === "document";
+        },
+      },
+    ],
   },
 });
 
