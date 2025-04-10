@@ -37,7 +37,7 @@ export default function Header() {
             />
 
             <Settings open={openSettings} />
-            <About open={openAbout} />
+            <About open={openAbout} setOpen={setOpenAbout} />
           </div>
         </ClickAwayListener>
       </Container>

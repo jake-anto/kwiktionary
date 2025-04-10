@@ -5,15 +5,23 @@ import {
   Box,
   Card,
   Collapse,
+  IconButton,
   Link,
+  Tooltip,
   Typography,
 } from "@mui/material";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, CodeXml, House, Info, Scale } from "lucide-react";
+import { Dispatch, useState } from "react";
 import LogoText from "../../logo";
 import { accordionData } from "./faqs";
 
-export default function About({ open }: { open: boolean }) {
+export default function About({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   const handleChange =
@@ -38,9 +46,50 @@ export default function About({ open }: { open: boolean }) {
       }}
     >
       <Card sx={{ maxWidth: 396, mx: "auto", width: "100%" }}>
-        <Typography variant="h6" sx={{ p: 2 }}>
-          About
-        </Typography>
+        <Box
+          sx={{
+            p: 2,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Info />
+            <Typography variant="h6">About</Typography>
+          </Box>
+          <div>
+            <Tooltip title="Go to homepage">
+              <IconButton
+                href="/"
+                LinkComponent={Link}
+                onClick={() => setOpen(false)}
+              >
+                <House />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="View license">
+              <IconButton
+                href="/about/license"
+                LinkComponent={Link}
+                onClick={() => setOpen(false)}
+              >
+                <Scale />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="View source code">
+              <IconButton
+                href="https://github.com/jake-anto/kwiktionary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CodeXml />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </Box>
+
         <Typography variant="body2" sx={{ px: 2, pb: 2 }}>
           <Link href="/">
             <LogoText

@@ -6,10 +6,17 @@ import {
   FormControl,
   FormLabel,
   IconButton,
+  Tooltip,
   Typography,
   useColorScheme,
 } from "@mui/material";
-import { Download, MoonStar, Sun, SunMoon } from "lucide-react";
+import {
+  Download,
+  Settings as Gear,
+  MoonStar,
+  Sun,
+  SunMoon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -88,9 +95,17 @@ export default function Settings({ open }: { open: boolean }) {
       }}
     >
       <Card sx={{ maxWidth: 396, mx: "auto", width: "100%" }}>
-        <Typography variant="h6" sx={{ p: 2 }}>
-          Settings
-        </Typography>
+        <Box
+          sx={{
+            p: 2,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Gear />
+          <Typography variant="h6">Settings</Typography>
+        </Box>
         <Box sx={{ px: 2, pb: 2 }}>
           <FormControl sx={{ width: "100%" }}>
             <Box
@@ -138,15 +153,16 @@ export default function Settings({ open }: { open: boolean }) {
                     <strong>Install</strong>
                   </Typography>
                 </FormLabel>
-
-                <Button
-                  variant="outlined"
-                  size="small"
-                  startIcon={<Download />}
-                  onClick={handleInstall}
-                >
-                  Install
-                </Button>
+                <Tooltip title="Your browser may not support this feature.">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    startIcon={<Download />}
+                    onClick={handleInstall}
+                  >
+                    Install
+                  </Button>
+                </Tooltip>
               </Box>
             </Box>
           </FormControl>
