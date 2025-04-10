@@ -15,6 +15,28 @@ import { Dispatch, useState } from "react";
 import LogoText from "../../logo";
 import { accordionData } from "./faqs";
 
+const linkData = [
+  {
+    title: "Go to homepage",
+    icon: <House />,
+    href: "/",
+  },
+  {
+    title: "View license",
+    icon: <Scale />,
+    href: "/about/license",
+  },
+  {
+    title: "View source code",
+    icon: <CodeXml />,
+    href: "https://github.com/jake-anto/kwiktionary",
+    additionalProps: {
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+  },
+];
+
 export default function About({
   open,
   setOpen,
@@ -60,33 +82,26 @@ export default function About({
             <Typography variant="h6">About</Typography>
           </Box>
           <div>
-            <Tooltip title="Go to homepage">
-              <IconButton
-                href="/"
-                LinkComponent={Link}
-                onClick={() => setOpen(false)}
-              >
-                <House />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="View license">
-              <IconButton
-                href="/about/license"
-                LinkComponent={Link}
-                onClick={() => setOpen(false)}
-              >
-                <Scale />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="View source code">
-              <IconButton
-                href="https://github.com/jake-anto/kwiktionary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <CodeXml />
-              </IconButton>
-            </Tooltip>
+            {linkData.map((link, index) => {
+              const { title, icon, href, additionalProps } = link;
+              return (
+                <Tooltip key={index} title={title}>
+                  <IconButton
+                    href={href}
+                    LinkComponent={Link}
+                    onClick={() => setOpen(false)}
+                    {...additionalProps}
+                    sx={{
+                      "&:hover": {
+                        color: "primary.main",
+                      },
+                    }}
+                  >
+                    {icon}
+                  </IconButton>
+                </Tooltip>
+              );
+            })}
           </div>
         </Box>
 
