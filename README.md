@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+<img src="https://raw.githubusercontent.com/jake-anto/kwiktionary/refs/heads/dev/public/android-chrome-512x512.png" alt="Kwiktionary Logo" width="200" height="200" />
+</p>
+
+<p align="center"><em>Kwiktionary is a fast and modern interface to the vast linguistic data of Wiktionary.</em></p>
+
+<p align="center">
+<a href="https://github.com/jake-anto/kwiktionary/actions/workflows/github-code-scanning/codeql">
+    <img src="https://github.com/jake-anto/kwiktionary/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL">
+</a>
+<a href="https://kwiktionary.vercel.app">
+    <img src="https://vercelbadge.vercel.app/api/jake-anto/kwiktionary" alt="Vercel">
+</a>
+<a href="https://kwiktionary.vercel.app/about/license">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/jake-anto/kwiktionary">
+</a>
+
+</p>
+
+---
+
+## Key Features
+
+- 📚 Massive database of over **1.2 million** entries
+- ⚡ Fast and responsive interface
+- 📱 Progressive Web App (PWA) support
+- 🌙 Dark mode support
+- ~~🌐 Multi-language support~~ _(feature is planned)_
+
+## Screenshots
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/jake-anto/kwiktionary/refs/heads/dev/public/screenshots/phone-dark-term.png" alt="Kwiktionary Screenshot" height="400" />
+  
+<img src="https://raw.githubusercontent.com/jake-anto/kwiktionary/refs/heads/dev/public/screenshots/wide-dark.png" alt="Kwiktionary Screenshot" height="400" />
+
+</p>
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository and install the dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/jake-anto/kwiktionary
+cd kwiktionary
+pnpm install # or npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To start the development server, run:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm dev # or npm run dev
+```
 
-## Learn More
+This will start the server on `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+### Production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Before starting the production server, you need to build the sitemaps. Run the following command to build the sitemaps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+python sitemap/generator.py
+```
 
-## Deploy on Vercel
+This will generate the sitemaps in the `public/sitemaps` directory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To start the production server, run:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm build # or npm run build
+pnpm start # or npm run start
+```
+
+This will build the project and start the server on `http://localhost:3000` in production mode.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+Also see the [license page](https://kwiktionary.vercel.app/about/license) for more information.
+
+### Linguistic data
+
+The linguistic data is derived from the [Wiktionary](https://www.wiktionary.org/) project. The data is dual-licensed under the:
+
+- [Creative Commons Attribution-ShareAlike 3.0 Unported License](https://creativecommons.org/licenses/by-sa/3.0/)
+- [GNU Free Documentation License](https://www.gnu.org/licenses/fdl-1.3.html)
+
+### Data extraction
+
+The data is extracted from a [Wiktionary dump](https://dumps.wikimedia.org/enwiktionary/) using [`wiktextract`](https://github.com/tatuylonen/wiktextract).
+
+## Contributing
+
+Contributions are welcome! Please read the [CONTRIBUTING](CONTRIBUTING.md) file for details on how to contribute to this project. Please make sure to follow the [Code of Conduct](CODE_OF_CONDUCT.md) when contributing.
