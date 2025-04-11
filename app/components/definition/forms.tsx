@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ChevronRight } from "lucide-react";
-import React from "react";
+import { useCallback, Fragment, useState } from "react";
 
 function FormsTable({ forms }: { forms: Forms }) {
   return (
@@ -29,23 +29,23 @@ function FormsTable({ forms }: { forms: Forms }) {
         </TableHead>
         <TableBody>
           {forms.map((form: Form, index: number) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <TableRow>
                 <TableCell>
                   <strong>{form.form}</strong>
                 </TableCell>
                 <TableCell>
                   {form.tags.map((tag: string, index: number) => (
-                    <React.Fragment key={index}>
+                    <Fragment key={index}>
                       <Box component="span" sx={{ whiteSpace: "nowrap" }}>
                         {tag}
                       </Box>
                       {form.tags.length - 1 ? ", " : ""}
-                    </React.Fragment>
+                    </Fragment>
                   ))}
                 </TableCell>
               </TableRow>
-            </React.Fragment>
+            </Fragment>
           ))}
         </TableBody>
       </Table>
@@ -54,40 +54,43 @@ function FormsTable({ forms }: { forms: Forms }) {
 }
 
 export default function Forms({ forms }: { forms: Forms }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>
       <Box sx={{ display: "flex", whiteSpace: "nowrap", alignItems: "center" }}>
         <Typography sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>
           {forms.map((form: Form, index: number) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <strong>
                 {form.tags[0]}
                 {": "}
               </strong>
               {form.form}
               {index < forms.length - 1 ? ", " : ""}
-            </React.Fragment>
+            </Fragment>
           ))}
         </Typography>
         <Tooltip title="See all forms">
           <IconButton
             size="small"
             sx={{ ml: 1 }}
-            onClick={() => setOpen(true)}
+            onClick={handleClick}
             aria-label="See all forms"
           >
             <ChevronRight />
           </IconButton>
         </Tooltip>
       </Box>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        maxWidth="sm"
-        fullWidth
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>Forms</DialogTitle>
         <DialogContent>
           <FormsTable forms={forms} />

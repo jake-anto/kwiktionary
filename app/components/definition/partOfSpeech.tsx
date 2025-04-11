@@ -4,7 +4,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // TODO: complete this from wiktextract.PART_OF_SPEECH
 const PartsOfSpeechExpanded: { [key: string]: string } = {
@@ -44,10 +44,19 @@ const PartOfSpeechExplanation: { [key: string]: string } = {
 export default function PartOfSpeech({ pos }: { pos: string }) {
   const [open, setOpen] = useState(false);
   const ExpandedPos = PartsOfSpeechExpanded[pos] || pos;
+
+  const handleClick = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
+
   return (
     <>
-      <Chip label={ExpandedPos} onClick={() => setOpen(true)} />
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Chip label={ExpandedPos} onClick={handleClick} />
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           {"Definition of "}
           {ExpandedPos.charAt(0).toUpperCase() + ExpandedPos.slice(1)}
