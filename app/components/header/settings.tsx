@@ -50,10 +50,18 @@ export default function Settings({ open }: { open: boolean }) {
     if (!installPrompt) {
       return;
     }
-    await installPrompt.prompt();
-    const { outcome } = await installPrompt.userChoice;
-    if (outcome === "accepted") {
+    try {
+      await installPrompt.prompt();
+      const { outcome } = await installPrompt.userChoice;
+      if (outcome === "accepted") {
+        setInstallSupport(false);
+        setInstallPrompt(null);
+      }
+    } catch (error) {
+      console.error("Error prompting installation:", error);
       setInstallSupport(false);
+      setInstallPrompt(null);
+      alert("Installation failed due to an error. See console for details.");
     }
   };
 
@@ -75,6 +83,7 @@ export default function Settings({ open }: { open: boolean }) {
         "beforeinstallprompt",
         handleBeforeInstallPrompt
       );
+      window.removeEventListener("appinstalled", handleBeforeInstallPrompt);
     };
   }, []);
 
