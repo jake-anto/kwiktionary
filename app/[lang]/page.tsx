@@ -50,7 +50,7 @@ function List({
           document.head.appendChild(meta);
         }
         // Update title for the error
-        document.title = `Error - Kwiktionary`;
+        document.title = "Error - Kwiktionary";
       }
     };
     fetchTerms();
