@@ -54,7 +54,7 @@ export default function About({
   );
 
   const handleClick = useCallback(() => {
-    setOpen((prev) => !prev);
+    setOpen(false);
   }, [setOpen]);
 
   return (
