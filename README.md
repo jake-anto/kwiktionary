@@ -58,7 +58,7 @@ This will start the server on `http://localhost:3000`.
 
 ### Production
 
-Before starting the production server, you need to build the sitemaps. Run the following command to build the sitemaps:
+Before starting the production server, you need to build the sitemaps. Run the following command for that:
 
 ```bash
 python sitemap/generator.py
