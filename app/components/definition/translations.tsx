@@ -17,7 +17,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { ChevronDown, Languages } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function TranslationsTableRowCollapsable({
   translation,
@@ -73,13 +73,17 @@ function TranslationsTableRow({ translation }: { translation: Translation }) {
     setOpen(false);
   }, [translation]);
 
+  const handleToggleOpen = useCallback(() => {
+    setOpen((prevOpen) => !prevOpen);
+  }, []);
+
   return (
     <>
       <TableRow>
         {translation?.tags || translation?.note || translation?.alt ? (
           <TableCell>
             <IconButton
-              onClick={() => setOpen(!open)}
+              onClick={handleToggleOpen}
               size="small"
               aria-label="Expand to see more"
               sx={{ py: 0 }}
@@ -114,10 +118,25 @@ function TranslationsTable({ translations }: { translations: Translations }) {
     translation.lang.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    setQuery((event.target as HTMLInputElement).value);
-    setPage(0);
-  };
+  const handleSearch = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      setQuery((event.target as HTMLInputElement).value);
+      setPage(0);
+    },
+    []
+  );
+
+  const handlePageChange = useCallback((event: unknown, newPage: number) => {
+    setPage(newPage);
+  }, []);
+
+  const handleRowsPerPageChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    },
+    []
+  );
 
   return (
     <Box sx={{ overflowX: "hidden", width: "100%" }}>
@@ -152,11 +171,8 @@ function TranslationsTable({ translations }: { translations: Translations }) {
         count={filteredTranslations.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={(event, newPage) => setPage(newPage)}
-        onRowsPerPageChange={(event) => {
-          setRowsPerPage(parseInt(event.target.value, 10));
-          setPage(0);
-        }}
+        onPageChange={handlePageChange}
+        onRowsPerPageChange={handleRowsPerPageChange}
       />
     </Box>
   );
@@ -169,6 +185,14 @@ export default function TranslationsComponent({
 }) {
   const [open, setOpen] = useState(false);
 
+  const handleOpenDialog = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleCloseDialog = useCallback(() => {
+    setOpen(false);
+  }, []);
+
   return (
     <>
       <Tooltip
@@ -176,16 +200,11 @@ export default function TranslationsComponent({
         placement="top"
         arrow
       >
-        <IconButton onClick={() => setOpen(true)} sx={{ mx: 0.5 }}>
+        <IconButton onClick={handleOpenDialog} sx={{ mx: 0.5 }}>
           <Languages />
         </IconButton>
       </Tooltip>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        maxWidth="sm"
-        fullWidth
-      >
+      <Dialog open={open} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
         <DialogTitle>Translations</DialogTitle>
         <DialogContent>
           <TranslationsTable translations={translations} />
