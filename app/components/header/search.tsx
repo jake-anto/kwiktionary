@@ -16,7 +16,6 @@ import {
 import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
-  Fragment,
   HTMLAttributes,
   useCallback,
   useEffect,
@@ -183,17 +182,13 @@ export default function SearchBar({
                 <Search />
               </Icon>
             ),
-            endAdornment: (
-              <Fragment>
-                {loading ? (
-                  <CircularProgress
-                    color="inherit"
-                    size={20}
-                    aria-label={loading ? "Loading search results" : ""}
-                  />
-                ) : null}
-              </Fragment>
-            ),
+            endAdornment: loading ? (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                aria-label={loading ? "Loading search results" : ""}
+              />
+            ) : null,
           },
         }}
       />

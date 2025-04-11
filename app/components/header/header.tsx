@@ -4,13 +4,18 @@ import SearchBar from "@/app/components/header/search";
 import { ClickAwayListener } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import About from "./about/about";
 import Settings from "./settings";
 
 export default function Header() {
   const [openSettings, setOpenSettings] = useState(false);
   const [openAbout, setOpenAbout] = useState(false);
+
+  const handleOnClickAway = useCallback(() => {
+    setOpenSettings(false);
+    setOpenAbout(false);
+  }, []);
 
   return (
     <Box
@@ -22,12 +27,7 @@ export default function Header() {
       }}
     >
       <Container maxWidth="xs" sx={{ p: 2, position: "relative" }}>
-        <ClickAwayListener
-          onClickAway={() => {
-            setOpenSettings(false);
-            setOpenAbout(false);
-          }}
-        >
+        <ClickAwayListener onClickAway={handleOnClickAway}>
           <div>
             <SearchBar
               openSettings={openSettings}

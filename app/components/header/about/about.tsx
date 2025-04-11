@@ -53,6 +53,10 @@ export default function About({
     []
   );
 
+  const handleClick = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
   return (
     <Collapse
       in={open}
@@ -91,7 +95,7 @@ export default function About({
                   <IconButton
                     href={href}
                     LinkComponent={Link}
-                    onClick={() => setOpen(false)}
+                    onClick={handleClick}
                     {...additionalProps}
                     sx={{
                       "&:hover": {
