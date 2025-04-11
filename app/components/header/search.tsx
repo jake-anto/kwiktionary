@@ -182,17 +182,13 @@ export default function SearchBar({
                 <Search />
               </Icon>
             ),
-            endAdornment: (
-              <>
-                {loading ? (
-                  <CircularProgress
-                    color="inherit"
-                    size={20}
-                    aria-label={loading ? "Loading search results" : ""}
-                  />
-                ) : null}
-              </>
-            ),
+            endAdornment: loading ? (
+              <CircularProgress
+                color="inherit"
+                size={20}
+                aria-label={loading ? "Loading search results" : ""}
+              />
+            ) : null,
           },
         }}
       />
