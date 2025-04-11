@@ -39,10 +39,10 @@ export default function Settings({ open }: { open: boolean }) {
       mode === "dark"
         ? "light"
         : mode === "light"
-        ? "system"
-        : mode === "system"
-        ? "dark"
-        : "dark"
+          ? "system"
+          : mode === "system"
+            ? "dark"
+            : "dark"
     );
   }, [mode, setMode]);
 
