@@ -111,7 +111,7 @@ function TranslationsTable({ translations }: { translations: Translations }) {
   const [query, setQuery] = useState("");
 
   const filteredTranslations = translations.filter((translation: Translation) =>
-    translation.lang.toLowerCase().includes(query.toLowerCase())
+    translation.lang.toLowerCase().includes(query.toLowerCase()),
   );
 
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -7,7 +7,7 @@ export async function getSuggestions(prefix: string): Promise<Suggestions[]> {
     return [];
   }
   const response = await fetch(
-    `${API_URL}/search/en?q=${encodeURIComponent(prefix)}&limit=7`
+    `${API_URL}/search/en?q=${encodeURIComponent(prefix)}&limit=7`,
   );
   return response.json();
 }
@@ -26,10 +26,10 @@ export async function getDefinition(term: string): Promise<Definitions> {
 export async function getListOfTerms(
   lang: string,
   limit: number,
-  offset: number
+  offset: number,
 ): Promise<TermsList> {
   const response = await fetch(
-    `${API_URL}/list/${lang}?limit=${limit}&offset=${offset + 1}` // +1 to skip the first term " "
+    `${API_URL}/list/${lang}?limit=${limit}&offset=${offset + 1}`, // +1 to skip the first term " "
   );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);

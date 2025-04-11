@@ -71,7 +71,7 @@ export default function SearchBar({
 
   const handleInputChange = (
     event: React.SyntheticEvent<Element, Event>,
-    value: string
+    value: string,
   ) => {
     setInputValue(value);
 
@@ -98,7 +98,7 @@ export default function SearchBar({
 
   const handleChange = (
     event: React.SyntheticEvent<Element, Event>,
-    value: Suggestions | null
+    value: Suggestions | null,
   ) => {
     if (!value) return;
     setOpenSuggestions(false);

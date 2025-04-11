@@ -39,10 +39,10 @@ export default function Settings({ open }: { open: boolean }) {
       mode === "dark"
         ? "light"
         : mode === "light"
-        ? "system"
-        : mode === "system"
-        ? "dark"
-        : "dark"
+          ? "system"
+          : mode === "system"
+            ? "dark"
+            : "dark",
     );
   };
 
@@ -81,7 +81,7 @@ export default function Settings({ open }: { open: boolean }) {
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
-        handleBeforeInstallPrompt
+        handleBeforeInstallPrompt,
       );
       window.removeEventListener("appinstalled", handleBeforeInstallPrompt);
     };

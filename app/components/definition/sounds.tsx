@@ -11,7 +11,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
   const getPronunciation = (accent: string, preference: string) => {
     const sound = sounds.find(
       (sound: Sound) =>
-        sound?.tags && sound.tags[0] === accent && (sound?.ipa || sound?.enpr)
+        sound?.tags && sound.tags[0] === accent && (sound?.ipa || sound?.enpr),
     );
 
     if (!sound) return null;
@@ -24,7 +24,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
   const getSound = (accent: string) => {
     const sound = sounds.find(
       (sound: Sound) =>
-        sound?.audio && sound?.audio.toLowerCase().startsWith(Accents[accent])
+        sound?.audio && sound?.audio.toLowerCase().startsWith(Accents[accent]),
     );
 
     return sound ? [accent, sound.mp3_url] : null;
@@ -71,7 +71,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
                 </Tooltip>
               )}
             </Box>
-          )
+          ),
       )}
     </>
   );

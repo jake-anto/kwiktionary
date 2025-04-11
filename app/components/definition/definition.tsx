@@ -134,7 +134,7 @@ export default function Definition({
                 />
                 <Divider />
               </React.Fragment>
-            ) : null
+            ) : null,
           )}
           {def?.etymology_text && <Etymology etymology={def.etymology_text} />}
         </CardContent>
