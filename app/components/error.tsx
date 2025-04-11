@@ -12,7 +12,7 @@ export default function Error({
 }) {
   return (
     <Snackbar
-      open={true}
+      open
       autoHideDuration={6000}
       onClose={() => {
         setError(null);

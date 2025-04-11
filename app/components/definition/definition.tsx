@@ -13,7 +13,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import { ChevronDown, Share2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Etymology from "./etymology";
 import Forms from "./forms";
 import { Wikipedia } from "./icons";
@@ -31,7 +31,7 @@ export default function Definition({
 }) {
   const [expanded, setExpanded] = useState(false);
 
-  const handleShare = () => {
+  const handleShare = useCallback(() => {
     navigator
       .share({
         title: `Definition of ${term}`,
@@ -39,7 +39,11 @@ export default function Definition({
         url: window.location.href,
       })
       .catch((error) => console.error("Error sharing:", error));
-  };
+  }, [def.pos, def.senses, term]);
+
+  const handleShowMore = useCallback(() => {
+    setExpanded((prev) => !prev);
+  }, []);
 
   return (
     <Card sx={{ p: 1.5, borderRadius: 5 }} variant="outlined">
@@ -98,9 +102,9 @@ export default function Definition({
           def?.related ||
           def?.etymology_text ? (
             <Button
-              onClick={() => setExpanded(!expanded)}
+              onClick={handleShowMore}
               aria-expanded={expanded}
-              aria-label="show more"
+              aria-label="Show more"
               endIcon={
                 <ChevronDown
                   style={{

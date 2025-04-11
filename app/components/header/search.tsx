@@ -11,10 +11,18 @@ import {
   Icon,
   IconButton,
   TextField,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { CornerDownLeft, Info, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Error from "../error";
 
 export default function SearchBar({
@@ -39,9 +47,9 @@ export default function SearchBar({
   // Cache for recent searches to avoid redundant API calls
   const searchCacheRef = useRef<Record<string, Suggestions[]>>({});
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpenSuggestions(false);
-  };
+  }, []);
 
   const fetchSuggestions = useCallback(async (value: string) => {
     if (!value) {
@@ -69,49 +77,129 @@ export default function SearchBar({
     }
   }, []);
 
-  const handleInputChange = (
-    event: React.SyntheticEvent<Element, Event>,
-    value: string
-  ) => {
-    setInputValue(value);
+  const handleInputChange = useCallback(
+    (event: React.SyntheticEvent<Element, Event>, value: string) => {
+      setInputValue(value);
 
-    // Clear previous debounce timer
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-
-    if (value) {
-      setOpenSuggestions(true);
-
-      if (!searchCacheRef.current[value]) {
-        setLoading(true);
+      // Clear previous debounce timer
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
       }
 
-      debounceTimerRef.current = setTimeout(() => {
-        fetchSuggestions(value);
-      }, 300);
-    } else {
+      if (value) {
+        setOpenSuggestions(true);
+
+        if (!searchCacheRef.current[value]) {
+          setLoading(true);
+        }
+
+        debounceTimerRef.current = setTimeout(() => {
+          fetchSuggestions(value);
+        }, 300);
+      } else {
+        setOpenSuggestions(false);
+        setLoading(false);
+      }
+    },
+    [fetchSuggestions]
+  );
+
+  const handleChange = useCallback(
+    (
+      event: React.SyntheticEvent<Element, Event>,
+      value: Suggestions | null
+    ) => {
+      if (!value) return;
       setOpenSuggestions(false);
-      setLoading(false);
-    }
-  };
+      router.push(`/en/${value}`);
+    },
+    [router]
+  );
 
-  const handleChange = (
-    event: React.SyntheticEvent<Element, Event>,
-    value: Suggestions | null
-  ) => {
-    if (!value) return;
-    setOpenSuggestions(false);
-    router.push(`/en/${value}`);
-  };
-
-  const handleFocus = () => {
+  const handleFocus = useCallback(() => {
     setOpenSettings(false);
     setOpenAbout(false);
     if (inputValue) {
       setOpenSuggestions(true);
     }
-  };
+  }, [inputValue, setOpenAbout, setOpenSettings]);
+
+  const handleInfoClick = useCallback(() => {
+    setTimeout(() => setOpenAbout(!openAbout), 300);
+    setOpenSettings(false);
+  }, [openAbout, setOpenAbout, setOpenSettings]);
+
+  const handleSettingsClick = useCallback(() => {
+    setTimeout(() => setOpenSettings(!openSettings), 300);
+    setOpenAbout(false);
+  }, [openSettings, setOpenAbout, setOpenSettings]);
+
+  const renderOption = useCallback(
+    (props: HTMLAttributes<HTMLLIElement>, option: Suggestions) => {
+      const isFirstOption = options.length > 0 && option === options[0];
+
+      return (
+        <Box
+          {...props}
+          component="li"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+            borderRadius: 5,
+          }}
+        >
+          {option}
+          {isFirstOption && (
+            <CornerDownLeft
+              style={{
+                marginLeft: "auto",
+              }}
+              aria-hidden="true"
+              role="presentation"
+            />
+          )}
+        </Box>
+      );
+    },
+    [options]
+  );
+
+  const renderInput = useCallback(
+    (params: AutocompleteRenderInputParams) => (
+      <TextField
+        {...params}
+        sx={{ mx: 1, my: 1 }}
+        variant="standard"
+        placeholder="Search"
+        slotProps={{
+          input: {
+            ...params.InputProps,
+            "aria-label": "Search for terms",
+            disableUnderline: true,
+            startAdornment: (
+              <Icon sx={{ mr: 1 }} aria-hidden="true">
+                <Search />
+              </Icon>
+            ),
+            endAdornment: (
+              <Fragment>
+                {loading ? (
+                  <CircularProgress
+                    color="inherit"
+                    size={20}
+                    aria-label={loading ? "Loading search results" : ""}
+                  />
+                ) : null}
+              </Fragment>
+            ),
+          },
+        }}
+      />
+    ),
+    [loading]
+  );
 
   // Clean up debounce timer on unmount
   useEffect(() => {
@@ -157,83 +245,15 @@ export default function SearchBar({
               "aria-label": "Search suggestions",
             },
           }}
-          renderOption={(props, option) => {
-            const { key, ...otherProps } = props;
-            const isFirstOption = options.length > 0 && option === options[0];
-
-            return (
-              <Box
-                key={key}
-                component="li"
-                {...otherProps}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "100%",
-                  borderRadius: 5,
-                }}
-              >
-                {option}
-                {isFirstOption && (
-                  <CornerDownLeft
-                    style={{
-                      marginLeft: "auto",
-                    }}
-                    aria-hidden="true"
-                    role="presentation"
-                  />
-                )}
-              </Box>
-            );
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              sx={{ mx: 1, my: 1 }}
-              variant="standard"
-              placeholder="Search"
-              slotProps={{
-                input: {
-                  ...params.InputProps,
-                  "aria-label": "Search for terms",
-                  disableUnderline: true,
-                  startAdornment: (
-                    <Icon sx={{ mr: 1 }} aria-hidden="true">
-                      <Search />
-                    </Icon>
-                  ),
-                  endAdornment: (
-                    <React.Fragment>
-                      {loading ? (
-                        <CircularProgress
-                          color="inherit"
-                          size={20}
-                          aria-label={loading ? "Loading search results" : ""}
-                        />
-                      ) : null}
-                    </React.Fragment>
-                  ),
-                },
-              }}
-            />
-          )}
+          renderOption={renderOption}
+          renderInput={renderInput}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton
-          onClick={() => {
-            setTimeout(() => setOpenAbout(!openAbout), 300);
-            setOpenSettings(false);
-          }}
-          aria-label="About"
-        >
+        <IconButton onClick={handleInfoClick} aria-label="About">
           <Info />
         </IconButton>
         <IconButton
-          onClick={() => {
-            setTimeout(() => setOpenSettings(!openSettings), 300);
-            setOpenAbout(false);
-          }}
+          onClick={handleSettingsClick}
           aria-label="Settings"
           aria-expanded={openSettings}
         >

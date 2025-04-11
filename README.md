@@ -8,6 +8,9 @@
 <a href="https://github.com/jake-anto/kwiktionary/actions/workflows/github-code-scanning/codeql">
     <img src="https://github.com/jake-anto/kwiktionary/actions/workflows/github-code-scanning/codeql/badge.svg" alt="CodeQL">
 </a>
+<a href="https://app.deepsource.com/gh/jake-anto/kwiktionary/" target="_blank">
+    <img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/jake-anto/kwiktionary.svg/?label=code+coverage&show_trend=true&token=9gJuc6ow-iABd7CH2dohMQoE"/>
+</a>
 <a href="https://kwiktionary.vercel.app">
     <img src="https://vercelbadge.vercel.app/api/jake-anto/kwiktionary" alt="Vercel">
 </a>

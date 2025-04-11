@@ -7,6 +7,15 @@ const Accents: { [key: string]: string } = {
   US: "en-us",
 };
 
+function playSound(url: string) {
+  return () => {
+    const audio = new Audio(url);
+    audio.play().catch((error) => {
+      console.error("Error playing sound:", error);
+    });
+  };
+}
+
 export default function Sounds({ sounds }: { sounds: Sounds }) {
   const getPronunciation = (accent: string, preference: string) => {
     const sound = sounds.find(
@@ -28,11 +37,6 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
     );
 
     return sound ? [accent, sound.mp3_url] : null;
-  };
-
-  const playSound = (location: string) => {
-    const audio = new Audio(location);
-    audio.play();
   };
 
   const data = [
@@ -64,7 +68,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
                   <IconButton
                     aria-label="Play audio pronunciation"
                     size="small"
-                    onClick={() => playSound(sound[1] as string)}
+                    onClick={playSound(sound[1] as string)}
                   >
                     <Volume2 />
                   </IconButton>

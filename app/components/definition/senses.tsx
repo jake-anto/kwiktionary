@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import Link from "@mui/material/Link";
 import { ChevronRight } from "lucide-react";
-import React from "react";
+import { Fragment, useCallback, useState } from "react";
 
 function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
   if (!links || Object.keys(links).length === 0) {
@@ -54,7 +54,7 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
             </Link>
           );
         } else {
-          return <React.Fragment key={index}>{part}</React.Fragment>;
+          return <Fragment key={index}>{part}</Fragment>;
         }
       })}
     </Typography>
@@ -62,7 +62,15 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
 }
 
 function Examples({ examples, term }: { examples: Examples; term: string }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>
@@ -73,7 +81,7 @@ function Examples({ examples, term }: { examples: Examples; term: string }) {
             <Button
               endIcon={<ChevronRight size="16px" />}
               size="small"
-              onClick={() => setOpen(true)}
+              onClick={handleClick}
               aria-label="More examples"
             >
               More
@@ -81,7 +89,7 @@ function Examples({ examples, term }: { examples: Examples; term: string }) {
           </Tooltip>
         </Box>
       </Box>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Examples</DialogTitle>
         <DialogContent>
           {examples.map((example: Example, index: number) => (

@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ChevronRight } from "lucide-react";
-import React, { useState } from "react";
+import { useCallback, useState, Fragment } from "react";
 
 function RelationsTable({ relations }: { relations: Relations }) {
   return (
@@ -31,7 +31,7 @@ function RelationsTable({ relations }: { relations: Relations }) {
         </TableHead>
         <TableBody>
           {relations.map((relation: Relation, index: number) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <TableRow>
                 <TableCell>
                   <Link href={`/en/${relation.word}`}>{relation.word}</Link>
@@ -45,7 +45,7 @@ function RelationsTable({ relations }: { relations: Relations }) {
                     ))}
                 </TableCell>
               </TableRow>
-            </React.Fragment>
+            </Fragment>
           ))}
         </TableBody>
       </Table>
@@ -64,6 +64,14 @@ export default function Relations({
 
   const tooltipText = `See all ${title.toLowerCase()}`;
 
+  const handleClick = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
+
   return (
     <>
       <Box
@@ -77,7 +85,7 @@ export default function Relations({
       >
         <Tooltip title={tooltipText} placement="top">
           <IconButton
-            onClick={() => setOpen(true)}
+            onClick={handleClick}
             size="small"
             aria-label={tooltipText}
           >
@@ -111,7 +119,7 @@ export default function Relations({
           ))}
         </Typography>
       </Box>
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm">
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <RelationsTable relations={relations} />

@@ -17,7 +17,7 @@ import {
   Sun,
   SunMoon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -34,19 +34,19 @@ export default function Settings({ open }: { open: boolean }) {
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
-  const handleThemeToggle = () => {
+  const handleThemeToggle = useCallback(() => {
     setMode(
       mode === "dark"
         ? "light"
         : mode === "light"
-        ? "system"
-        : mode === "system"
-        ? "dark"
-        : "dark"
+          ? "system"
+          : mode === "system"
+            ? "dark"
+            : "dark"
     );
-  };
+  }, [mode, setMode]);
 
-  const handleInstall = async () => {
+  const handleInstall = useCallback(async () => {
     if (!installPrompt) {
       return;
     }
@@ -63,7 +63,7 @@ export default function Settings({ open }: { open: boolean }) {
       setInstallPrompt(null);
       alert("Installation failed due to an error. See console for details.");
     }
-  };
+  }, [installPrompt]);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: Event) => {
