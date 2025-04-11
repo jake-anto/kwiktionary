@@ -18,7 +18,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useParams } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 function List({
   amountTerms,
@@ -33,6 +39,21 @@ function List({
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [rows, setRows] = useState<TermsList>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const handlePageChange = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+      setPage(newPage);
+    },
+    []
+  );
+
+  const handleRowsPerPageChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    },
+    []
+  );
 
   useEffect(() => {
     const fetchTerms = async () => {
@@ -95,13 +116,8 @@ function List({
                 rowsPerPage={rowsPerPage}
                 page={page}
                 disabled={loading}
-                onPageChange={(event, newPage) => {
-                  setPage(newPage);
-                }}
-                onRowsPerPageChange={(event) => {
-                  setRowsPerPage(parseInt(event.target.value, 10));
-                  setPage(0);
-                }}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleRowsPerPageChange}
                 sx={{
                   "& .MuiTablePagination-toolbar": {
                     overflowX: "auto",
