@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ChevronDown, CodeXml, House, Info, Scale } from "lucide-react";
-import { Dispatch, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import LogoText from "../../logo";
 import { accordionData } from "./faqs";
 
@@ -46,10 +46,12 @@ export default function About({
 }) {
   const [expanded, setExpanded] = useState<number | null>(null);
 
-  const handleChange =
-    (panel: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleChange = useCallback(
+    (panel: number) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : null);
-    };
+    },
+    []
+  );
 
   return (
     <Collapse
