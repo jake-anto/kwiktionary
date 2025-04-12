@@ -67,7 +67,7 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
                 sx={{ color: "text.secondary", whiteSpace: "nowrap" }}
               >
                 <b>{pronunciation?.[0] || sound?.[0]} </b>
-                {pronunciation && pronunciation[1]}
+                {pronunciation?.[1]}
               </Typography>
               {sound && (
                 <Tooltip title="Play audio pronunciation" placement="top" arrow>
