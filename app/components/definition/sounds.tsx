@@ -7,6 +7,11 @@ const Accents: { [key: string]: string } = {
   US: "en-us",
 };
 
+const AlternativeAccents: { [key: string]: string } = {
+  UK: "Received-Pronunciation",
+  US: "General-American",
+};
+
 function playSound(url: string) {
   return () => {
     const audio = new Audio(url);
@@ -20,7 +25,8 @@ export default function Sounds({ sounds }: { sounds: Sounds }) {
   const getPronunciation = (accent: string, preference: string) => {
     const sound = sounds.find(
       (sound: Sound) =>
-        sound?.tags && sound.tags[0] === accent && (sound?.ipa || sound?.enpr)
+        (sound?.tags && sound.tags[0] === accent) ||
+        (AlternativeAccents[accent] && (sound?.ipa || sound?.enpr))
     );
 
     if (!sound) return null;
