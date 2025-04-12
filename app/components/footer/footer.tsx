@@ -1,6 +1,7 @@
-import { Box, Typography, Link, Button } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import { Github } from "lucide-react";
 import { Logo } from "../logo";
+import Donate from "./donate/donate";
 
 const LINK_PROPS = {
   target: "_blank",
@@ -50,18 +51,22 @@ export default function Footer() {
           Wikimedia Foundation, the operator of Wiktionary.
         </Typography>
       </Box>
-      <Button
-        startIcon={<Github />}
-        aria-label="View source code at GitHub"
-        href="https://github.com/jake-anto/kwiktionary"
-        variant="outlined"
-        {...LINK_PROPS}
-        sx={{
-          mb: 2,
-        }}
-      >
-        Source Code
-      </Button>
+      <Box sx={{ mb: 1 }}>
+        <Button
+          startIcon={<Github />}
+          aria-label="View source code at GitHub"
+          href="https://github.com/jake-anto/kwiktionary"
+          variant="outlined"
+          {...LINK_PROPS}
+          sx={{
+            mx: 0.5,
+            mb: 1,
+          }}
+        >
+          Source Code
+        </Button>
+        <Donate />
+      </Box>
       <Typography sx={{ color: "text.secondary" }}>
         Made with ❤️ by{" "}
         <Link href="https://github.com/jake-anto" {...LINK_PROPS}>
