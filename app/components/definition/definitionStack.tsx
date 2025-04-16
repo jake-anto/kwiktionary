@@ -63,7 +63,7 @@ export default function DefinitionStack({
         .querySelector("meta[name='description']")
         ?.setAttribute(
           "content",
-          `Definition of ${term}: "${definitions?.definition[0]?.senses[0]?.glosses[0]}"`
+          `Definition of ${term}: "${definitions?.definition[0]?.senses[0]?.glosses[0]}. See synonyms, antonyms, and more at Kwiktionary."`
         );
     }
   }, [term, definitions?.definition]);
