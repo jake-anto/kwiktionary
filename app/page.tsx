@@ -16,9 +16,21 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Kwiktionary",
+  url: "https://kwiktionary.vercel.app",
+  alternateName: "kwiktionary",
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Logo
         props={{ variant: "h1" }}
         styleProps={{
