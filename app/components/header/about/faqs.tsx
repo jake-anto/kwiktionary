@@ -43,7 +43,7 @@ export const accordionData: AccordionData[] = [
     question: "How do I report a bug or request a feature?",
     answer: (
       <>
-        Please use the the{" "}
+        Please use the{" "}
         <Link
           href="https://github.com/jake-anto/kwiktionary/issues/new"
           target="_blank"
