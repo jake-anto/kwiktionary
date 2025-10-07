@@ -1,8 +1,8 @@
 "use client";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, Theme } from "@mui/material/styles";
 import Link from "next/link";
 
-const theme = createTheme({
+export const themeOptions = {
   typography: {
     fontFamily: "var(--font-inter)",
   },
@@ -38,7 +38,6 @@ const theme = createTheme({
     MuiLink: {
       defaultProps: {
         component: Link,
-        // @ts-expect-error: MuiLink doesn't have prefetch prop
         prefetch: false,
       },
     },
@@ -56,7 +55,7 @@ const theme = createTheme({
         },
       },
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }: { theme: Theme }) => ({
           border: `1px solid ${theme.palette.divider}`,
         }),
       },
@@ -77,7 +76,7 @@ const theme = createTheme({
     },
     MuiTableHead: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }: { theme: Theme }) => ({
           "& th": {
             backgroundColor:
               theme.palette.mode === "dark" ? "#231f17" : "#999080",
@@ -88,7 +87,7 @@ const theme = createTheme({
     },
     MuiTablePagination: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }: { theme: Theme }) => ({
           backgroundColor:
             theme.palette.mode === "dark" ? "#231f17" : "#999080",
           color: theme.palette.mode === "dark" ? "white" : "black",
@@ -103,7 +102,7 @@ const theme = createTheme({
         arrow: true,
       },
       styleOverrides: {
-        tooltip: ({ theme }) => ({
+        tooltip: ({ theme }: { theme: Theme }) => ({
           backgroundColor: theme.palette.background.paper,
           backdropFilter: "blur(10px)",
           color: theme.palette.text.primary,
@@ -122,6 +121,17 @@ const theme = createTheme({
   shape: {
     borderRadius: 5,
   },
-});
+};
 
-export default theme;
+// Temporarily comment out the export to prevent TS2345 error
+export default createTheme({
+  ...themeOptions,
+  components: {
+    ...themeOptions.components,
+    MuiSkeleton: {
+      defaultProps: {
+        animation: "pulse", // Change to "pulse" or remove this line to use default
+      },
+    },
+  },
+});
