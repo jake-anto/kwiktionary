@@ -58,7 +58,7 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: ({ theme }) => ({
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${(theme.vars || theme).palette.divider}`,
         }),
       },
     },
@@ -80,9 +80,12 @@ const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           "& th": {
-            backgroundColor:
-              theme.palette.mode === "dark" ? "#231f17" : "#999080",
-            color: theme.palette.mode === "dark" ? "white" : "black",
+            backgroundColor: "#999080",
+            color: "black",
+            ...theme.applyStyles?.("dark", {
+              backgroundColor: "#231f17",
+              color: "white",
+            }),
           },
         }),
       },
@@ -90,9 +93,12 @@ const theme = createTheme({
     MuiTablePagination: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor:
-            theme.palette.mode === "dark" ? "#231f17" : "#999080",
-          color: theme.palette.mode === "dark" ? "white" : "black",
+          backgroundColor: "#999080",
+          color: "black",
+          ...theme.applyStyles?.("dark", {
+            backgroundColor: "#231f17",
+            color: "white",
+          }),
         }),
       },
       defaultProps: {
@@ -105,10 +111,10 @@ const theme = createTheme({
       },
       styleOverrides: {
         tooltip: ({ theme }) => ({
-          backgroundColor: theme.palette.background.paper,
+          backgroundColor: (theme.vars || theme).palette.background.paper,
           backdropFilter: "blur(10px)",
-          color: theme.palette.text.primary,
-          border: `1px solid ${theme.palette.divider}`,
+          color: (theme.vars || theme).palette.text.primary,
+          border: `1px solid ${(theme.vars || theme).palette.divider}`,
         }),
       },
     },
