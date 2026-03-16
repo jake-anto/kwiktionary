@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { API_URL } from "./utils/api";
 import Footer from "./components/footer/footer";
+import { SerwistProvider } from "./serwist";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,16 +46,18 @@ export default function RootLayout({
           gridTemplateRows: "auto 1fr auto",
         }}
       >
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme} defaultMode="dark">
-            <CssBaseline />
-            <Header />
-            <Container maxWidth="sm" sx={{ p: 2, minWidth: 10 }}>
-              {children}
-            </Container>
-            <Footer />
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <SerwistProvider swUrl="/serwist/sw.js">
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={theme} defaultMode="dark">
+              <CssBaseline />
+              <Header />
+              <Container maxWidth="sm" sx={{ p: 2, minWidth: 10 }}>
+                {children}
+              </Container>
+              <Footer />
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </SerwistProvider>
       </body>
     </html>
   );

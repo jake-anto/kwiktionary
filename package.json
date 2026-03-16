@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint ."
   },
@@ -22,11 +22,13 @@
     "react-highlight-words": "^0.21.0"
   },
   "devDependencies": {
+    "@serwist/turbopack": "^9.5.7",
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^20.19.37",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/react-highlight-words": "^0.20.1",
+    "esbuild": "^0.27.4",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.1.6",
     "eslint-config-prettier": "^10.1.8",
