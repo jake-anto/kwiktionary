@@ -88,10 +88,7 @@ export default function Settings({ open }: { open: boolean }) {
   }, []);
 
   return (
-    <Collapse
-      in={open}
-      timeout="auto"
-      unmountOnExit
+    <Box
       sx={{
         position: "absolute",
         top: "100%",
@@ -103,80 +100,87 @@ export default function Settings({ open }: { open: boolean }) {
         pointerEvents: open ? "auto" : "none",
       }}
     >
-      <Card sx={{ maxWidth: 396, mx: "auto", width: "100%" }}>
-        <Box
-          sx={{
-            p: 2,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <Gear />
-          <Typography variant="h6">Settings</Typography>
-        </Box>
-        <Box sx={{ px: 2, pb: 2 }}>
-          <FormControl sx={{ width: "100%" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <FormLabel id="theme-toggle">
-                <Typography>
-                  <strong>Theme</strong>
-                </Typography>
-              </FormLabel>
-              <Box>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  sx={{
-                    color: "text.secondary",
-                  }}
-                >{`(${mode})`}</Typography>
-
-                <IconButton
-                  onClick={handleThemeToggle}
-                  aria-label="Toggle theme"
-                >
-                  {mode === "dark" && <MoonStar />}
-                  {mode === "light" && <Sun />}
-                  {mode === "system" && <SunMoon />}
-                </IconButton>
-              </Box>
-            </Box>
-            <Box>
+      <Collapse
+        in={open}
+        timeout="auto"
+        unmountOnExit
+        sx={{ width: "100%", maxWidth: 396 }}
+      >
+        <Card sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <Gear />
+            <Typography variant="h6">Settings</Typography>
+          </Box>
+          <Box sx={{ px: 2, pb: 2 }}>
+            <FormControl sx={{ width: "100%" }}>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
-                hidden={!installSupport}
               >
-                <FormLabel id="download">
+                <FormLabel id="theme-toggle">
                   <Typography>
-                    <strong>Install</strong>
+                    <strong>Theme</strong>
                   </Typography>
                 </FormLabel>
-                <Tooltip title="Your browser may not support this feature.">
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    startIcon={<Download />}
-                    onClick={handleInstall}
+                <Box>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    sx={{
+                      color: "text.secondary",
+                    }}
+                  >{`(${mode})`}</Typography>
+
+                  <IconButton
+                    onClick={handleThemeToggle}
+                    aria-label="Toggle theme"
                   >
-                    Install
-                  </Button>
-                </Tooltip>
+                    {mode === "dark" && <MoonStar />}
+                    {mode === "light" && <Sun />}
+                    {mode === "system" && <SunMoon />}
+                  </IconButton>
+                </Box>
               </Box>
-            </Box>
-          </FormControl>
-        </Box>
-      </Card>
-    </Collapse>
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                  hidden={!installSupport}
+                >
+                  <FormLabel id="download">
+                    <Typography>
+                      <strong>Install</strong>
+                    </Typography>
+                  </FormLabel>
+                  <Tooltip title="Your browser may not support this feature.">
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      startIcon={<Download />}
+                      onClick={handleInstall}
+                    >
+                      Install
+                    </Button>
+                  </Tooltip>
+                </Box>
+              </Box>
+            </FormControl>
+          </Box>
+        </Card>
+      </Collapse>
+    </Box>
   );
 }

@@ -58,10 +58,7 @@ export default function About({
   }, [setOpen]);
 
   return (
-    <Collapse
-      in={open}
-      timeout="auto"
-      unmountOnExit
+    <Box
       sx={{
         position: "absolute",
         top: "100%",
@@ -73,77 +70,84 @@ export default function About({
         pointerEvents: open ? "auto" : "none",
       }}
     >
-      <Card sx={{ maxWidth: 396, mx: "auto", width: "100%" }}>
-        <Box
-          sx={{
-            p: 2,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            justifyContent: "space-between",
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Info />
-            <Typography variant="h6">About</Typography>
+      <Collapse
+        in={open}
+        timeout="auto"
+        unmountOnExit
+        sx={{ width: "100%", maxWidth: 396 }}
+      >
+        <Card sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              justifyContent: "space-between",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Info />
+              <Typography variant="h6">About</Typography>
+            </Box>
+            <div>
+              {linkData.map((link, index) => {
+                const { title, icon, href, additionalProps } = link;
+                return (
+                  <Tooltip key={index} title={title}>
+                    <IconButton
+                      href={href}
+                      LinkComponent={Link}
+                      onClick={handleClick}
+                      {...additionalProps}
+                      sx={{
+                        "&:hover": {
+                          color: "primary.main",
+                        },
+                      }}
+                    >
+                      {icon}
+                    </IconButton>
+                  </Tooltip>
+                );
+              })}
+            </div>
           </Box>
-          <div>
-            {linkData.map((link, index) => {
-              const { title, icon, href, additionalProps } = link;
-              return (
-                <Tooltip key={index} title={title}>
-                  <IconButton
-                    href={href}
-                    LinkComponent={Link}
-                    onClick={handleClick}
-                    {...additionalProps}
-                    sx={{
-                      "&:hover": {
-                        color: "primary.main",
-                      },
-                    }}
-                  >
-                    {icon}
-                  </IconButton>
-                </Tooltip>
-              );
-            })}
-          </div>
-        </Box>
 
-        <Typography variant="body2" sx={{ px: 2, pb: 2 }}>
-          <Link href="/">
-            <LogoText
-              text="K"
-              props={{
-                component: "span",
-              }}
-            />
-            wiktionary
-          </Link>{" "}
-          delivers the comprehensive language data you expect from Wiktionary,
-          wrapped in a lightning-fast, user-friendly package.
-        </Typography>
-        <Box sx={{ px: 2, pb: 2 }}>
-          {accordionData.map((item, index) => (
-            <Accordion
-              key={index}
-              variant="outlined"
-              disableGutters
-              expanded={expanded === index}
-              onChange={handleChange(index)}
-              sx={{ border: "none", backgroundColor: "transparent" }}
-            >
-              <AccordionSummary expandIcon={<ChevronDown />}>
-                <Typography variant="body2">{item.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="body2">{item.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Box>
-      </Card>
-    </Collapse>
+          <Typography variant="body2" sx={{ px: 2, pb: 2 }}>
+            <Link href="/">
+              <LogoText
+                text="K"
+                props={{
+                  component: "span",
+                }}
+              />
+              wiktionary
+            </Link>{" "}
+            delivers the comprehensive language data you expect from Wiktionary,
+            wrapped in a lightning-fast, user-friendly package.
+          </Typography>
+          <Box sx={{ px: 2, pb: 2 }}>
+            {accordionData.map((item, index) => (
+              <Accordion
+                key={index}
+                variant="outlined"
+                disableGutters
+                expanded={expanded === index}
+                onChange={handleChange(index)}
+                sx={{ border: "none", backgroundColor: "transparent" }}
+              >
+                <AccordionSummary expandIcon={<ChevronDown />}>
+                  <Typography variant="body2">{item.question}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2">{item.answer}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Card>
+      </Collapse>
+    </Box>
   );
 }
