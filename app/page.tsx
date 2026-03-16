@@ -1,7 +1,7 @@
 import FeatureCard from "@/app/components/home/featureCard";
 import { Logo } from "@/app/components/logo";
 import { Link, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { Grid } from '@mui/material';
 import { Code2, LibraryBig, MonitorSmartphone, Rabbit } from "lucide-react";
 import { Metadata } from "next";
 
