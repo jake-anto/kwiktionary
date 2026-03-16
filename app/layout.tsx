@@ -1,3 +1,4 @@
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import Header from "@/app/components/header/header";
 import theme from "@/app/styles/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="dns-prefetch" href={API_URL} />
         <script
@@ -46,6 +47,7 @@ export default function RootLayout({
           gridTemplateRows: "auto 1fr auto",
         }}
       >
+        <InitColorSchemeScript attribute="class" />
         <SerwistProvider swUrl="/serwist/sw.js">
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme} defaultMode="dark">

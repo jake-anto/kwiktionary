@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material/styles";
 import Link from "next/link";
 
 const theme = createTheme({
+  cssVariables: { colorSchemeSelector: "class" },
   typography: {
     fontFamily: "var(--font-inter)",
   },
