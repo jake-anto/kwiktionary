@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, Typography, useMediaQuery } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 
 export default function FeatureCard({
   logo,
@@ -11,7 +11,6 @@ export default function FeatureCard({
   title: string;
   description: string;
 }) {
-  const alternativeStyle = useMediaQuery("(min-width:600px)");
   return (
     <Card sx={{ height: "100%" }}>
       <Box
@@ -19,22 +18,22 @@ export default function FeatureCard({
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          flexDirection: alternativeStyle ? "column" : "row",
+          flexDirection: { xs: "row", sm: "column" },
           p: 1,
         }}
       >
         <Box
           sx={{
             color: "primary.main",
-            mr: alternativeStyle ? 0 : 1,
+            mr: { xs: 1, sm: 0 },
           }}
         >
           {logo}
         </Box>
-        <Box>
+        <Box sx={{ width: "100%" }}>
           <Typography
             variant="h6"
-            sx={{ textAlign: alternativeStyle ? "center" : "left" }}
+            sx={{ textAlign: { xs: "left", sm: "center" } }}
           >
             {title}
           </Typography>
@@ -42,7 +41,7 @@ export default function FeatureCard({
             variant="caption"
             component="p"
             sx={{
-              textAlign: alternativeStyle ? "center" : "left",
+              textAlign: { xs: "left", sm: "center" },
               color: "text.secondary",
             }}
           >
