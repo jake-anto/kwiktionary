@@ -6,32 +6,37 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.4.9",
-    "@mui/material-nextjs": "^6.4.3",
-    "@serwist/next": "^9.0.12",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.9",
+    "@mui/material-nextjs": "^7.3.9",
+    "@serwist/next": "^9.5.7",
     "lucide-react": "^0.485.0",
-    "next": "15.2.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-highlight-words": "^0.21.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@tailwindcss/postcss": "^4.0.17",
-    "@types/node": "^20.17.28",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
-    "@types/react-highlight-words": "^0.20.0",
-    "eslint": "^9.23.0",
-    "eslint-config-next": "15.2.3",
-    "eslint-config-prettier": "^10.1.1",
-    "serwist": "^9.0.12",
-    "typescript": "^5.8.2"
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/node": "^20.19.37",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/react-highlight-words": "^0.20.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "serwist": "^9.5.7",
+    "typescript": "^5.9.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.14",
+      "@types/react-dom": "19.2.3"
+    }
   }
 }
