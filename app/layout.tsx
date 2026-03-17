@@ -10,6 +10,7 @@ import { Inter } from "next/font/google";
 import { API_URL } from "./utils/api";
 import Footer from "./components/footer/footer";
 import { SerwistProvider } from "./serwist";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,10 +33,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="dns-prefetch" href={API_URL} />
-        <script
-          defer
+        <Script
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "79bd5efc4f2048d7aba2e67ce6cbc0db"}'
+          strategy="afterInteractive"
         />
       </head>
 
