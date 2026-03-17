@@ -119,7 +119,7 @@ export default function Definition({
           ) : null}
         </div>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={expanded} timeout="auto">
         <CardContent>
           {[
             { key: "synonyms", title: "Synonyms" },
