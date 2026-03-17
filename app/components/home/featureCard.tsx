@@ -12,7 +12,15 @@ export default function FeatureCard({
   description: string;
 }) {
   return (
-    <Card sx={{ height: "100%" }}>
+    <Card
+      sx={{
+        height: "100%",
+        transition: "border-color 0.3s ease-in-out",
+        "&:hover": {
+          borderColor: "primary.main",
+        },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
