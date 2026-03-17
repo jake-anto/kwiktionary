@@ -115,7 +115,7 @@ export default function About({
           </Box>
 
           <Typography variant="body2" sx={{ px: 2, pb: 2 }}>
-            <Link href="/">
+            <Link href="/" aria-label="Kwiktionary">
               <LogoText
                 text="K"
                 props={{
