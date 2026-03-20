@@ -1,3 +1,5 @@
+"use client";
+
 import PartOfSpeech from "@/app/components/definition/partOfSpeech";
 import { type Definition, Relations as RelationsType } from "@/app/types/types";
 import {

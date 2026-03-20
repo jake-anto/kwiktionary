@@ -1,3 +1,5 @@
+"use client";
+
 import { Alert, Snackbar, SnackbarProps } from "@mui/material";
 import { CircleAlert } from "lucide-react";
 import { useCallback } from "react";
