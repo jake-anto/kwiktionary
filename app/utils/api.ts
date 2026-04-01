@@ -1,6 +1,6 @@
 import { Definitions, Stats, Suggestions, TermsList } from "../types/types";
 
-export const API_URL = "https://dict.apihost.site/v1/";
+export const API_URL = "http://35.209.17.14/v1/";
 
 export async function getSuggestions(prefix: string): Promise<Suggestions[]> {
   if (!prefix) {
