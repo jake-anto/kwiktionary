@@ -21,7 +21,15 @@ import Link from "@mui/material/Link";
 import { ChevronRight } from "lucide-react";
 import { Fragment, useCallback, useState } from "react";
 
-function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
+function Gloss({
+  gloss,
+  links,
+  lang,
+}: {
+  gloss: Gloss;
+  links?: string[];
+  lang: string;
+}) {
   if (!links || Object.keys(links).length === 0) {
     return <Typography>{gloss}</Typography>;
   }
@@ -49,7 +57,7 @@ function Gloss({ gloss, links }: { gloss: Gloss; links?: string[] }) {
       {parts.map((part, index) => {
         if (linkables.includes(part)) {
           return (
-            <Link key={index} underline="hover" href={`/en/${part}`}>
+            <Link key={index} underline="hover" href={`/${lang}/${part}`}>
               {part}
             </Link>
           );
@@ -115,9 +123,11 @@ function Examples({ examples, term }: { examples: Examples; term: string }) {
 export default function Senses({
   senses,
   term,
+  lang,
 }: {
   senses: Senses;
   term: string;
+  lang: string;
 }) {
   return (
     <List component="ol" sx={{ listStyleType: "decimal", pl: 4 }}>
@@ -128,7 +138,7 @@ export default function Senses({
           sx={{ display: "list-item", pl: 1 }}
         >
           {sense.glosses && (
-            <Gloss gloss={sense.glosses[0]} links={sense.links} />
+            <Gloss gloss={sense.glosses[0]} links={sense.links} lang={lang} />
           )}
           {sense.examples && <Examples examples={sense.examples} term={term} />}
         </ListItem>

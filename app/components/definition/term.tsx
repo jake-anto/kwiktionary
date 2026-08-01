@@ -2,10 +2,10 @@ import { Box, Skeleton, Typography } from "@mui/material";
 
 export default function Term({
   term,
-  loading,
+  loading = false,
 }: {
   term?: string;
-  loading: boolean;
+  loading?: boolean;
 }) {
   return (
     <Box>
