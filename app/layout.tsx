@@ -1,10 +1,8 @@
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import Header from "@/app/components/header/header";
-import theme from "@/app/styles/theme";
+import ThemeRegistry from "@/app/styles/themeRegistry";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { API_URL } from "./utils/api";
@@ -51,14 +49,13 @@ export default function RootLayout({
         <InitColorSchemeScript attribute="class" />
         <SerwistProvider swUrl="/serwist/sw.js">
           <AppRouterCacheProvider>
-            <ThemeProvider theme={theme} defaultMode="dark">
-              <CssBaseline />
+            <ThemeRegistry>
               <Header />
               <Container maxWidth="sm" sx={{ p: 2, minWidth: 10 }}>
                 {children}
               </Container>
               <Footer />
-            </ThemeProvider>
+            </ThemeRegistry>
           </AppRouterCacheProvider>
         </SerwistProvider>
       </body>
