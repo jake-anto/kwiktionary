@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import { getStats } from "../utils/api";
 
 export async function generateStaticParams() {
@@ -8,12 +7,6 @@ export async function generateStaticParams() {
     lang,
   }));
 }
-
-export const metadata: Metadata = {
-  title: "List of all entries - Kwiktionary",
-  description:
-    "A list of all entries in the Kwiktionary database. It contains over 1.2 million entries in English.",
-};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return children;

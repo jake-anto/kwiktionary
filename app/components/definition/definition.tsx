@@ -1,3 +1,5 @@
+"use client";
+
 import PartOfSpeech from "@/app/components/definition/partOfSpeech";
 import { type Definition, Relations as RelationsType } from "@/app/types/types";
 import {
@@ -13,7 +15,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import { ChevronDown, Share2 } from "lucide-react";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Etymology from "./etymology";
 import Forms from "./forms";
 import { Wikipedia } from "./icons";
@@ -25,11 +27,20 @@ import Translations from "./translations";
 export default function Definition({
   def,
   term,
+  lang,
 }: {
   def: Definition;
   term: string;
+  lang: string;
 }) {
   const [expanded, setExpanded] = useState(false);
+  // Resolved after mount: navigator is unavailable during server rendering,
+  // and reading it during render would cause a hydration mismatch.
+  const [canShare, setCanShare] = useState(false);
+
+  useEffect(() => {
+    setCanShare(typeof navigator !== "undefined" && !!navigator.share);
+  }, []);
 
   const handleShare = useCallback(() => {
     navigator
@@ -68,7 +79,7 @@ export default function Definition({
 
       {def.senses && (
         <Box sx={{ mt: 2 }}>
-          <Senses senses={def.senses} term={term} />
+          <Senses senses={def.senses} term={term} lang={lang} />
         </Box>
       )}
       <CardActions sx={{ justifyContent: "space-between" }}>
@@ -87,7 +98,7 @@ export default function Definition({
           )}
         </div>
         <div>
-          {navigator.share !== undefined && (
+          {canShare && (
             <IconButton onClick={handleShare} aria-label="share">
               <Share2 />
             </IconButton>
