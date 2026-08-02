@@ -1,6 +1,5 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Term not found - Kwiktionary",
@@ -18,7 +17,7 @@ export default function NotFound() {
           We couldn&apos;t find an entry for this term. Check the spelling, or
           try searching for something else.
         </Typography>
-        <Button component={Link} href="/" variant="outlined">
+        <Button href="/" variant="outlined">
           Back to home
         </Button>
       </Stack>
